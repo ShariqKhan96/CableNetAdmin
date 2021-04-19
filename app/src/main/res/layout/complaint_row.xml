@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/b1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:text="Customer: Muhammad Shariq Khan"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/customer_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_name"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:text="Address: F.B Area, Block 09, Yaseenabad"
+                android:textColor="@color/androidGreyDark"
+                android:textSize="17sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/customer_agent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_address"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:drawableEnd="@drawable/ic_baseline_local_phone_24"
+                android:text="Agent: Shariq Khan"
+                android:textColor="@color/androidGreyDark"
+                android:textSize="17sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/complaint_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/complaint_status"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:text="Issue: Slow Speed"
+                android:textColor="@color/wrongRed"
+                android:textSize="17sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/complaint_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customer_agent"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:text="Status: Resolved"
+                android:textColor="@color/androidGreyDark"
+                android:textSize="17sp">
+
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/top_right_round_view">
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Acknowledge"
+                    android:textColor="@color/white">
+
+                </TextView>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/view_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:text="View Details"
+                android:textColor="@color/androidGrey"
+                android:textSize="16sp"
+                android:visibility="gone">
+
+            </TextView>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

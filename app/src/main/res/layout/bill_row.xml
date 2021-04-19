@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/b1"-->
+        <!--            android:layout_width="100dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/day"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:background="@color/colorPrimary"-->
+        <!--                android:gravity="center_vertical|center_horizontal"-->
+        <!--                android:padding="5dp"-->
+        <!--                android:text="Sun"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:textSize="13sp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/date_day"-->
+
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:text="12"-->
+        <!--                android:textColor="@android:color/black"-->
+        <!--                android:textSize="33sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/month_year"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center|bottom"-->
+        <!--                android:layout_marginBottom="5dp"-->
+        <!--                android:text="Apr 2020"-->
+        <!--                android:textSize="14sp" />-->
+        <!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:id="@+id/b2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/b1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/image_container"
+                android:text="Customer: Muhammad Shariq Khan"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/agent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Agent: Saqib"
+                android:textColor="@color/androidGreyDark"
+                android:textSize="17sp"
+                android:visibility="gone">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/bill_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Status: Paid"
+                android:textColor="@color/androidGreyDark"
+                android:textSize="17sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/bill_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Balance: 100 Rs"
+                android:textColor="@color/wrongRed"
+                android:textSize="17sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/bill_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Paid At: 14-Apr-2020"
+                android:textColor="@color/androidGreyDark"
+                android:textSize="17sp"
+                android:visibility="gone">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/b2"
+            android:layout_marginTop="10dp">
+
+            <FrameLayout
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom"
+
+                android:layout_marginTop="10dp"
+                android:background="@drawable/top_right_round_view">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="5 MBPS Package"
+                    android:textColor="@color/white">
+
+                </TextView>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/view_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:text="View Detail"
+                android:textColor="@color/androidGrey"
+                android:textSize="16sp">
+
+            </TextView>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

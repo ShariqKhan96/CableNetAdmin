@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.cabill.admin">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CableNetAdmin">
+        <activity android:name=".view.ui.messaging.CreateMessageActivity"></activity>
+        <activity android:name=".view.ui.bill.BillDetailActivity" />
+        <activity android:name=".view.ui.complaint.ComplaintDetailActivity" />
+        <activity android:name=".view.ui.complaint.ComplaintListActivity" />
+        <activity android:name=".view.ui.area.AreaLocalityListActivity" />
+        <activity android:name=".view.ui.agent.AgentListActivity" />
+        <activity android:name=".view.ui.packages.CreatePackageActivity" />
+        <activity android:name=".view.ui.sublocality.SublocalityActivity" />
+        <activity android:name=".view.ui.area.CreateAreaActivity" />
+        <activity android:name=".view.ui.agent.CreateAgentActivity" />
+        <activity android:name=".view.ui.customer.CustomerListActivity" />
+        <activity android:name=".view.ui.customer.CustomerDetailActivity" />
+        <activity
+            android:name=".view.Dashboard"
+            android:label="@string/title_activity_dashboard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

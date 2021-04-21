@@ -43,9 +43,10 @@ class CableTvBillFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentResolvedBinding.inflate(inflater, container, false)
         binding.complaints.apply {
-            adapter = BillAdapter()
+            adapter = BillAdapter(context)
         }
-        return binding.root    }
+        return binding.root
+    }
 
     companion object {
         /**

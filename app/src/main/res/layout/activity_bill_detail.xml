@@ -165,6 +165,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:imeOptions="actionNext"
                 android:paddingStart="10dp"
+                android:layout_marginBottom="20dp"
                 android:paddingEnd="10dp">
 
             </EditText>

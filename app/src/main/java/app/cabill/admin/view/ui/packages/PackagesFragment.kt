@@ -56,7 +56,7 @@ class PackagesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.packages.apply {
-            adapter = PackageAdapter()
+            adapter = PackageAdapter(context)
         }
     }
 

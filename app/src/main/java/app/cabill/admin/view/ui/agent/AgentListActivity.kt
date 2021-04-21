@@ -9,6 +9,7 @@ import app.cabill.admin.R
 import app.cabill.admin.adapter.AgentAdapter
 import app.cabill.admin.databinding.ActivityAgentListBinding
 import app.cabill.admin.databinding.ActivityCreatePackageBinding
+import app.cabill.admin.view.ui.map.MapsActivity
 
 class AgentListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAgentListBinding
@@ -23,10 +24,13 @@ class AgentListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.agents.apply {
-            adapter = AgentAdapter()
+            adapter = AgentAdapter(this@AgentListActivity)
         }
         binding.fab.setOnClickListener {
             startActivity(Intent(this, CreateAgentActivity::class.java))
+        }
+        binding.mapView.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
         }
 
 

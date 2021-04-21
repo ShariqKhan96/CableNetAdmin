@@ -8,6 +8,7 @@ import android.widget.TextView
 import app.cabill.admin.R
 import app.cabill.admin.adapter.ConnectionAdapter
 import app.cabill.admin.databinding.ActivityCustomerListBinding
+import app.cabill.admin.view.ui.map.MapsActivity
 
 class CustomerListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCustomerListBinding
@@ -22,10 +23,14 @@ class CustomerListActivity : AppCompatActivity() {
             finish()
         }
         binding.customers.apply {
-            adapter = ConnectionAdapter()
+            adapter = ConnectionAdapter(this@CustomerListActivity)
         }
         binding.fab.setOnClickListener {
             startActivity(Intent(this, CustomerDetailActivity::class.java))
         }
+        binding.mapView.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
+
     }
 }

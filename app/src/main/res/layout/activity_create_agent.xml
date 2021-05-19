@@ -29,6 +29,7 @@
                 android:text="Name" />
 
             <EditText
+                android:id="@+id/nameEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -36,6 +37,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:imeOptions="actionNext"
                 android:paddingStart="10dp"
+                android:inputType="textCapWords"
                 android:paddingEnd="10dp">
 
             </EditText>
@@ -72,26 +74,6 @@
 
             </EditText>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
-                android:text="CNIC" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_edt"
-                android:digits="0123456789-"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="15"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-
-            </EditText>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,6 +83,7 @@
                 android:text="Phone No." />
 
             <EditText
+                android:id="@+id/phoneEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -108,7 +91,7 @@
                 android:digits="0123456789+()"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:maxLength="16"
+                android:maxLength="11"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">
 
@@ -136,13 +119,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="Resident Address" />
+                android:text="CNIC" />
 
             <EditText
+                android:id="@+id/cnicEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edt"
+                android:digits="0123456789-"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="13"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingStart="10dp"
+                android:text="Resident Address"
+
+                />
+
+            <EditText
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edt"
+                android:focusableInTouchMode="false"
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp" />
@@ -155,6 +164,7 @@
                 android:text="Salary" />
 
             <EditText
+                android:id="@+id/salary"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -168,9 +178,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="CNIC" />
+                android:text="Religion" />
 
             <EditText
+                android:id="@+id/regligionEdt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -191,6 +202,7 @@
                 android:weightSum="2">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center"
@@ -208,6 +220,7 @@
                 </com.google.android.material.button.MaterialButton>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center"

@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.cabill.admin.R
+import app.cabill.admin.model.Agent
 import app.cabill.admin.view.ui.agent.CreateAgentActivity
 
-class AgentAdapter(context: Context) : RecyclerView.Adapter<AgentAdapter.MYVH>() {
+class AgentAdapter(context: Context, l: List<Agent>) : RecyclerView.Adapter<AgentAdapter.MYVH>() {
     var con: Context = context
+    var list: List<Agent> = l
 
     class MYVH(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -29,11 +31,11 @@ class AgentAdapter(context: Context) : RecyclerView.Adapter<AgentAdapter.MYVH>()
 
     override fun onBindViewHolder(holder: MYVH, position: Int) {
         holder.view.setOnClickListener {
-            con.startActivity(Intent(con, CreateAgentActivity::class.java))
+            con.startActivity(Intent(con, CreateAgentActivity::class.java).putExtra("action", 1))
         }
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return list.size
     }
 }

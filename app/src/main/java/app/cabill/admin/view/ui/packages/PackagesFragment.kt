@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import app.cabill.admin.R
 import app.cabill.admin.adapter.PackageAdapter
 import app.cabill.admin.databinding.FragmentPackagesBinding
+import app.cabill.admin.model.Package
+import app.cabill.admin.util.Utils
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +30,8 @@ class PackagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var list: ArrayList<Package> = arrayListOf()
+    lateinit var adapter_: PackageAdapter
 
     private lateinit var binding: FragmentPackagesBinding
 
@@ -50,14 +56,35 @@ class PackagesFragment : Fragment() {
                 it.startActivity(Intent(it, CreatePackageActivity::class.java))
             }
         }
+        adapter_ = PackageAdapter(requireContext(), list)
+        initViewModel()
+        binding.packages.apply {
+            adapter = adapter_
+        }
         return binding.root
+    }
+
+    private fun initViewModel() {
+        val vm = ViewModelProvider(requireActivity()).get(PackageFragmentViewModel::class.java)
+        vm.getLoaderObserver().observe(requireActivity(), Observer {
+            if (it)
+                Utils.getInstance().showLoader(requireActivity(), "Please wait...")
+            else Utils.getInstance().dismissLoader()
+        })
+        vm.getPackageListObserver().observe(requireActivity(), Observer { response ->
+            if (!response.error) {
+                list.addAll(response.data)
+                adapter_.notifyDataSetChanged()
+            } else
+                Utils.getInstance().showAlertDialog(requireContext(), response.message, "Error")
+        })
+        vm.getPackages()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.packages.apply {
-            adapter = PackageAdapter(context)
-        }
+
     }
 
     companion object {

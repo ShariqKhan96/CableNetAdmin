@@ -48,6 +48,7 @@
                 android:text="Name" />
 
             <EditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -64,9 +65,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="Amount" />
+                android:text="Amount in PKR" />
 
             <EditText
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -85,9 +87,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="Discount" />
+                android:text="Discount in %" />
 
             <EditText
+                android:id="@+id/discount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -109,6 +112,7 @@
                 android:text="Category" />
 
             <EditText
+                android:id="@+id/cateogory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -129,6 +133,7 @@
                 android:text="Type" />
 
             <EditText
+                android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -146,7 +151,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="Status" />
+                android:text="Status"
+                android:visibility="gone" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -159,7 +165,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp" />
+                android:paddingEnd="10dp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -170,6 +177,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="0dp"
+                    android:id="@+id/save"
                     android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
@@ -188,6 +196,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="0dp"
                     android:layout_height="55dp"
+                    android:id="@+id/delete"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"

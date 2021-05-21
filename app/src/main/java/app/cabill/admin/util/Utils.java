@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.location.LocationManager;
+import android.text.TextUtils;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -17,6 +18,18 @@ public class Utils {
             instance = new Utils();
         return instance;
     }
+    public boolean anyFieldEmpty(String[] strings) {
+        boolean isEmpty = false;
+        for (int i = 0; i < strings.length; i++) {
+            if (TextUtils.isEmpty(strings[i])) {
+                isEmpty = true;
+                break;
+
+            }
+        }
+        return isEmpty;
+    }
+
     public FusedLocationProviderClient getFusedClient(Context context) {
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(context);
         return client;

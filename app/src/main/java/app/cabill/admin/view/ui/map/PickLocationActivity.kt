@@ -5,6 +5,7 @@ import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import app.cabill.admin.R
 import app.cabill.admin.databinding.ActivityPickLocationBinding
 import app.cabill.admin.interfaces.ILocationListener
@@ -36,6 +37,8 @@ class PickLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.save.visibility = View.GONE
 
         binding.save.setOnClickListener {
             val intent = Intent()
@@ -80,6 +83,7 @@ class PickLocationActivity : AppCompatActivity(), OnMapReadyCallback {
             client
         ) { locationResult, callback ->
             MyLocationProvider.getMyLocationProvider().stopUpdates(client, callback)
+            binding.save.visibility = View.VISIBLE
             location = LatLng(
                 locationResult.lastLocation.latitude,
                 locationResult.lastLocation.longitude
@@ -90,7 +94,7 @@ class PickLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     LatLng(
                         locationResult.lastLocation.latitude,
                         locationResult.lastLocation.longitude
-                    ), 12f
+                    ), 15f
                 )
             )
             mMap.setOnCameraIdleListener {

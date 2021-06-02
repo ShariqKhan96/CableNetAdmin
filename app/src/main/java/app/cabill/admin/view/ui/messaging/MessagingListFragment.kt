@@ -6,10 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import app.cabill.admin.R
 import app.cabill.admin.adapter.MessageAdapter
 import app.cabill.admin.databinding.FragmentMessagingListBinding
+import app.cabill.admin.model.Message
+import app.cabill.admin.util.Utils
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +31,9 @@ class MessagingListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentMessagingListBinding
-
+    private lateinit var adapter: MessageAdapter
+    private val list = ArrayList<Message>()
+    private lateinit var viewModel: MessageViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,8 +66,9 @@ class MessagingListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMessagingListBinding.inflate(inflater, container, false)
+        adapter = MessageAdapter(list)
         binding.messages.apply {
-            adapter = MessageAdapter()
+            adapter = this@MessagingListFragment.adapter
         }
         binding.toolbar.toolbarTv.text = "Messages"
         binding.toolbar.back.visibility = View.GONE
@@ -70,7 +78,21 @@ class MessagingListFragment : Fragment() {
                 startActivity(Intent(it, CreateMessageActivity::class.java))
             }
         }
+        initViewModel()
         return binding.root
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this)
+            .get(MessageViewModel::class.java)
+        viewModel.messageLiveDataObserver().observe(viewLifecycleOwner, Observer { res ->
+            if (!res.error) {
+                list.addAll(res.data!!)
+                adapter.notifyDataSetChanged()
+            } else {
+                Utils.getInstance().showAlertDialog(context, res.message, "Error")
+            }
+        })
     }
 
 

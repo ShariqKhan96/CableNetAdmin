@@ -25,7 +25,7 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/person">
+                android:src="@drawable/ic_baseline_person_24">
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -33,10 +33,10 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_gravity="bottom|end"
-
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/green_online_circle" />
+                android:background="@drawable/green_online_circle"
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -80,11 +80,11 @@
 
         <ImageView
             android:id="@+id/whatsapp"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_below="@id/image_container"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/image_container"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_whatsapp">
@@ -93,11 +93,11 @@
 
         <ImageView
             android:id="@+id/phone"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_below="@id/image_container"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/whatsapp"
             android:src="@drawable/ic_baseline_local_phone_24"
             app:tint="@color/colorPrimaryDark">

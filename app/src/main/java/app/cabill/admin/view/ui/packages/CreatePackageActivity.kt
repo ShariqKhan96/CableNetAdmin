@@ -21,57 +21,32 @@ class CreatePackageActivity : AppCompatActivity() {
     var package_: Package? = null
     var categoryId: Int = 0
     var typeId: Int = 0
-    lateinit var categories: Array<NameID>
-    lateinit var types: Array<NameID>
+    var categoriesName: ArrayList<String> = ArrayList()
+    var categoriesID: ArrayList<Int> = ArrayList()
+    var typesName: ArrayList<String> = ArrayList()
+    var typesID: ArrayList<Int> = ArrayList()
 
 
-    fun show(type: String) {
-        val array: Array<String>
-        if (type == "type") {
-            array = Array(types.size) { "" }
-            val i: Int = 0
-            for (va in types) {
-                array[i] = va.name
-            }
-        } else {
-            array = Array(categories.size) { "" }
-            val i: Int = 0
-            for (va in categories) {
-                array[i] = va.name
-            }
-        }
+    fun show(array: ArrayList<String>, type: String) {
+
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setItems(array, DialogInterface.OnClickListener { dialogInterface, i ->
-            if (type == "type") {
-                activityCreatePackageBinding.type.setText(types[i].name)
-                typeId = get_(type, types[i].name)
-            } else {
-                activityCreatePackageBinding.type.setText(categories[i].name)
-                categoryId = get_(type, categories[i].name)
-            }
+        builder.setItems(
+            array.toTypedArray(),
+            DialogInterface.OnClickListener { dialogInterface, i ->
+                if (type == "type") {
+                    activityCreatePackageBinding.type.setText(typesName[i])
+                    typeId = typesID[i]
+                } else {
+                    activityCreatePackageBinding.cateogory.setText(categoriesName[i])
+                    categoryId = categoriesID[i]
+                }
 
-            dialogInterface.dismiss()
-        })
+                dialogInterface.dismiss()
+            })
+        builder.show()
     }
 
-    fun get_(type: String, name: String): Int {
-        var id: Int = 0
-        if (type == "type") {
-            for (n_ in types) {
-                if (n_.name == name) {
-                    id = n_.id
-                }
-            }
-        } else {
-            for (n_ in categories) {
-                if (n_.name == name) {
-                    id = n_.id
-                }
-            }
-        }
-        return id
-    }
 
     private lateinit var activityCreatePackageBinding: ActivityCreatePackageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +60,10 @@ class CreatePackageActivity : AppCompatActivity() {
             finish()
         }
         activityCreatePackageBinding.cateogory.setOnClickListener {
-            show("type")
+            show(categoriesName, "category")
+        }
+        activityCreatePackageBinding.type.setOnClickListener {
+            show(typesName, "type")
         }
         initVm()
 
@@ -113,8 +91,14 @@ class CreatePackageActivity : AppCompatActivity() {
             }
         })
         vm.catTypesObserver().observe(this, Observer { response ->
-            categories = response.data.packageCategories.toTypedArray()
-            types = response.data.packageTypes.toTypedArray()
+            for (i in response.data?.packageCategories?.indices!!) {
+                categoriesName.add(response.data?.packageCategories!![i].name)
+                categoriesID.add(response.data?.packageCategories!![i].id)
+            }
+            for (i in response.data?.packageTypes?.indices!!) {
+                typesName.add(response.data?.packageTypes!![i].name)
+                typesID.add(response.data?.packageTypes!![i].id)
+            }
         })
         vm.categoriesAndTypes()
 
@@ -124,8 +108,8 @@ class CreatePackageActivity : AppCompatActivity() {
                 package_!!.amount = activityCreatePackageBinding.amount.text.toString().toInt()
                 package_!!.name = activityCreatePackageBinding.name.text.toString()
                 package_!!.discount = activityCreatePackageBinding.discount.text.toString().toInt()
-                package_!!.packageCategoryId = categoryId
-                package_!!.packageTypeId = typeId
+                package_!!.package_category_id = categoryId
+                package_!!.package_type_id = typeId
 
                 vm.updatePackage(package_!!)
 

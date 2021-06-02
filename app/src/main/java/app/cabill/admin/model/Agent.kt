@@ -9,7 +9,7 @@ data class Agent(
     var address: String,
     var longitude: Double,
     var latitude: Double,
-    var religion: Int,
+    var religion_id: Int,
     var is_active: Int,
     var id:Int?,
     var salary:String

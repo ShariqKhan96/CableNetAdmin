@@ -15,13 +15,13 @@ data class Package(
     @SerializedName("id")
     var id: Int,
     @SerializedName("is_active")
-    var isActive: Int,
+    var is_active: Int,
     @SerializedName("name")
     var name: String,
     @SerializedName("package_category_id")
-    var packageCategoryId: Int,
+    var package_category_id: Int,
     @SerializedName("package_type_id")
-    var packageTypeId: Int,
+    var package_type_id: Int,
     @SerializedName("updated_at")
     var updatedAt: String,
     @SerializedName("package_type")

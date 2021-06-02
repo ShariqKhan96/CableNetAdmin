@@ -1,5 +1,7 @@
 package app.cabill.admin.model
 
-class Response<T>(val data: T, val message: String, val error: Boolean) {
+import java.sql.ClientInfoStatus
+
+class Response<T>(var data: T?, val message: String, val error: Boolean, var status: String) {
 
 }

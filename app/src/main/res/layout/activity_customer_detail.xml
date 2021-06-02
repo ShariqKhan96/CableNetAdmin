@@ -11,6 +11,7 @@
         layout="@layout/toolbar" />
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar">
@@ -46,6 +47,7 @@
                 android:text="Name" />
 
             <EditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -64,6 +66,7 @@
                 android:text="Select Area" />
 
             <EditText
+                android:id="@+id/area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -84,6 +87,7 @@
                 android:text="Select Sublocality" />
 
             <EditText
+                android:id="@+id/sub_locality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -104,6 +108,7 @@
                 android:text="CNIC" />
 
             <EditText
+                android:id="@+id/cnic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -111,7 +116,7 @@
                 android:digits="0123456789-"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:maxLength="15"
+                android:maxLength="13"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">
 
@@ -125,6 +130,7 @@
                 android:text="Phone No." />
 
             <EditText
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -132,7 +138,7 @@
                 android:digits="0123456789+()"
                 android:imeOptions="actionNext"
                 android:inputType="number"
-                android:maxLength="16"
+                android:maxLength="11"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">
 
@@ -163,6 +169,8 @@
                 android:text="Resident Address" />
 
             <EditText
+                android:focusableInTouchMode="false"
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -171,6 +179,7 @@
                 android:paddingStart="10dp" />
 
             <EditText
+                android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -180,17 +189,23 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp"
                 android:visibility="gone" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
                 android:layout_marginTop="15dp"
+                android:paddingStart="10dp"
                 android:text="Religion" />
+
             <EditText
+                android:id="@+id/regligionEdt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edt"
+                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                android:focusableInTouchMode="false"
                 android:imeOptions="actionDone"
                 android:paddingStart="10dp" />
 
@@ -198,10 +213,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
                 android:layout_marginTop="15dp"
-                android:text="Select Package" />
+                android:paddingStart="10dp"
+                android:text="Select Package"
+                android:visibility="gone" />
+
             <EditText
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -210,15 +228,18 @@
                 android:focusableInTouchMode="false"
                 android:imeOptions="actionNext"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                android:paddingEnd="10dp"
+                android:visibility="gone">
 
             </EditText>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
                 android:layout_marginTop="15dp"
-                android:text="Status" />
+                android:paddingStart="10dp"
+                android:text="Status"
+                android:visibility="gone" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -229,7 +250,54 @@
                 android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
                 android:focusableInTouchMode="false"
                 android:imeOptions="actionNext"
-                android:paddingStart="10dp" />
+                android:paddingStart="10dp"
+                android:visibility="gone" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/lightGreen"
+                    app:cornerRadius="15dp">
+
+                </com.google.android.material.button.MaterialButton>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:text="Delete"
+
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/lightGreen"
+                    app:cornerRadius="15dp">
+
+                </com.google.android.material.button.MaterialButton>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -240,6 +308,7 @@
         android:id="@+id/activity_main_rfal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         rfal:rfal_frame_alpha="0.7"
         rfal:rfal_frame_color="#ffffff">
 

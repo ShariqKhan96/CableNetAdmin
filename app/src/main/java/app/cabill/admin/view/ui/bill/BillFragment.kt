@@ -29,7 +29,7 @@ class BillFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-
+    private lateinit var viewModel: BillViewModel
     private lateinit var binding: FragmentBillBinding
 
 

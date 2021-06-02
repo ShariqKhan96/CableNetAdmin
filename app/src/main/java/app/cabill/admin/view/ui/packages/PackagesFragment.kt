@@ -30,6 +30,7 @@ class PackagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var vm: PackageFragmentViewModel
     var list: ArrayList<Package> = arrayListOf()
     lateinit var adapter_: PackageAdapter
 
@@ -49,6 +50,10 @@ class PackagesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPackagesBinding.inflate(inflater, container, false)
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = false
+            vm.getPackages()
+        }
         binding.root.findViewById<TextView>(R.id.toolbarTv).text = "My Packages"
         binding.root.findViewById<ImageView>(R.id.back).visibility = View.GONE
         binding.fab.setOnClickListener {
@@ -65,7 +70,7 @@ class PackagesFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val vm = ViewModelProvider(requireActivity()).get(PackageFragmentViewModel::class.java)
+        vm = ViewModelProvider(requireActivity()).get(PackageFragmentViewModel::class.java)
         vm.getLoaderObserver().observe(requireActivity(), Observer {
             if (it)
                 Utils.getInstance().showLoader(requireActivity(), "Please wait...")
@@ -73,7 +78,8 @@ class PackagesFragment : Fragment() {
         })
         vm.getPackageListObserver().observe(requireActivity(), Observer { response ->
             if (!response.error) {
-                list.addAll(response.data)
+                list.clear()
+                list.addAll(response.data!!)
                 adapter_.notifyDataSetChanged()
             } else
                 Utils.getInstance().showAlertDialog(requireContext(), response.message, "Error")

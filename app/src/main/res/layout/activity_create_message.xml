@@ -29,15 +29,15 @@
                 android:id="@+id/select_template"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Template"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edt"
-                android:focusableInTouchMode="false"
                 android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                android:focusableInTouchMode="false"
                 android:fontFamily="@font/roboto_regular"
                 android:imeOptions="actionNext"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                android:paddingEnd="10dp"
+                android:text="Select Template">
 
             </EditText>
 
@@ -70,16 +70,16 @@
                 android:text="Message" />
 
             <EditText
-android:id="@+id/messageEdt"
+                android:id="@+id/messageEdt"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:gravity="top"
-                android:paddingTop="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edt"
                 android:fontFamily="@font/roboto_regular"
+                android:gravity="top"
                 android:imeOptions="actionNext"
                 android:paddingStart="10dp"
+                android:paddingTop="10dp"
                 android:paddingEnd="10dp">
 
             </EditText>
@@ -109,6 +109,7 @@ android:id="@+id/messageEdt"
                 android:weightSum="2">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/send_all_agent"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center"
@@ -126,8 +127,10 @@ android:id="@+id/messageEdt"
                 </com.google.android.material.button.MaterialButton>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/send_all_customer"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
+
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"

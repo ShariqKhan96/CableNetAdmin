@@ -29,7 +29,14 @@ class PackageRepository(
     fun createPackage(pack: Package) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client().createPackage(pack)
+            val response = RetrofitInstance.client().createPackage(
+                pack.name,
+                pack.amount.toString(),
+                pack.discount.toString(),
+                pack.package_type_id,
+                pack.package_category_id,
+                1
+            )
             loaderLiveData.postValue(false)
             packageCreateMutableLiveData.postValue(response)
         }

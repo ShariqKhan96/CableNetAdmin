@@ -35,9 +35,13 @@ class DashboardFragment : Fragment() {
             ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         //val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        binding.totalEarningTv.text = tvTransform("225,600", "PKR")
-        binding.receivableTv.text = tvTransform("25,600", "PKR")
-        binding.balanceTv.text = tvTransform("15,600", "PKR")
+        binding.totalEarningTv.text = tvTransform("0", "PKR")
+        binding.receivableTv.text = tvTransform("0", "PKR")
+        binding.balanceTv.text = tvTransform("0", "PKR")
+
+        binding.calendarIv.setOnClickListener {
+
+        }
 
         binding.manageCustomer.setOnClickListener {
             activity?.let {

@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import app.cabill.admin.R
+import app.cabill.admin.databinding.FragmentChangePasswordBinding
+import app.cabill.admin.databinding.FragmentGeneralSettingsBinding
 import app.cabill.admin.databinding.FragmentProfileBinding
+import app.cabill.admin.util.Utils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -35,7 +40,7 @@ class ProfileFragment : Fragment() {
 
     class ProfileDividerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-        override fun getItemCount(): Int = 2
+        override fun getItemCount(): Int = 1
 
         override fun createFragment(position: Int): Fragment {
             // Return a NEW fragment instance in createFragment(int)
@@ -47,17 +52,18 @@ class ProfileFragment : Fragment() {
             return fragment1
         }
     }
-
-
     class ChangePasswordFragment : Fragment() {
 
+        lateinit var binding: FragmentChangePasswordBinding
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View {
-            return inflater.inflate(R.layout.fragment_change_password, container, false)
+            binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
+            return binding.root
         }
+
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -66,17 +72,40 @@ class ProfileFragment : Fragment() {
 
     class GeneralSettingsFragment : Fragment() {
 
+        lateinit var binding: FragmentGeneralSettingsBinding
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View {
-            return inflater.inflate(R.layout.fragment_general_settings, container, false)
+            binding = FragmentGeneralSettingsBinding.inflate(inflater, container, false)
+
+            return binding.root
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            val viewModel: ProfileViewModel = ViewModelProvider(this)
+                .get(ProfileViewModel::class.java)
+            viewModel.loaderLiveData.observe(viewLifecycleOwner, Observer {
+                if (it)
+                    Utils.getInstance().showLoader(context, "Please wait..")
+                else Utils.getInstance().dismissLoader()
+            })
+            viewModel.getProfileObserver().observe(viewLifecycleOwner, Observer {
+                if (!it.error) {
 
+                    binding.ownerEmailEdt.setText(it.data?.email)
+                    binding.address.setText(it.data?.address.toString())
+                    binding.name.setText(it.data?.name)
+                    binding.phone.setText(it.data?.phone.toString())
+
+                } else {
+
+                }
+            })
+            viewModel.getProfile()
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

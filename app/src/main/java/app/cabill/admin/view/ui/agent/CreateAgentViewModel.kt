@@ -29,8 +29,14 @@ class CreateAgentViewModel : ViewModel() {
         loader.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.client().createAgent(agent)
-            createLiveData.postValue(response)
-            loader.postValue(false)
+            if (response.isSuccessful) {
+                createLiveData.postValue(response.body())
+                loader.postValue(false)
+            } else {
+                createLiveData.postValue(null)
+                loader.postValue(false)
+            }
+
         }
     }
 

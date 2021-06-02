@@ -36,4 +36,5 @@ class LoginActivity : AppCompatActivity() {
             Utils.getInstance().showAlertDialog(this, it, "Error")
         })
     }
+
 }

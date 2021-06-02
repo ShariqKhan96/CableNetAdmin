@@ -25,6 +25,7 @@ class CreateAgentActivity : AppCompatActivity() {
 
     var action: Int = 0 ///0->create, 1->edit/delete
     var agent: Agent? = null
+    val religionID: Int = 1
 
     lateinit var viewModel: CreateAgentViewModel
     lateinit var binding: ActivityCreateAgentBinding
@@ -40,16 +41,20 @@ class CreateAgentActivity : AppCompatActivity() {
 
     }
 
+
     private fun intentDecider() {
         action = intent.getIntExtra("action", 0)
         if (action == 0)
             binding.delete.visibility = View.GONE
         else binding.delete.visibility = View.VISIBLE
 
-        agent = if (intent.hasCategory("agent")) {
+        agent = if (intent.hasExtra("agent")) {
             Gson().fromJson(intent.getStringExtra("agent"), Agent::class.java)
         } else
             null
+
+        if (agent != null)
+            binding.save.visibility = View.GONE
     }
 
     private fun actions() {
@@ -94,13 +99,15 @@ class CreateAgentActivity : AppCompatActivity() {
     }
 
     private fun bindData(agent: Agent?) {
+        if (agent == null)
+            return
         binding.nameEdt.setText(agent?.name)
         binding.cnicEdt.setText(agent?.cnic)
         binding.address.setText(agent?.address)
         binding.ownerEmailEdt.setText(agent?.email)
         binding.phoneEdt.setText(agent?.phone)
         binding.salary.setText(agent?.salary)
-        binding.regligionEdt.setText(agent?.religion.toString())
+        binding.regligionEdt.setText(agent?.religion_id.toString())
     }
 
     private fun initViewModel() {
@@ -111,26 +118,32 @@ class CreateAgentActivity : AppCompatActivity() {
             else Utils.getInstance().dismissLoader()
         })
         viewModel.createAgentObserver().observe(this, Observer { response ->
-            if (!response.error) {
+            if (response!=null){
+                if (!response.error) {
+                    Utils.getInstance()
+                        .showAlertDialog(
+                            this,
+                            "Agent created with ID ${response.data?.id}",
+                            "Operation Successful"
+                        )
+                } else {
+                    Utils.getInstance()
+                        .showAlertDialog(this, response.message, "Error")
+                }
+
+            }else{
                 Utils.getInstance()
-                    .showAlertDialog(
-                        this,
-                        "Agent created with ID ${response.data.id}",
-                        "Operation Successful"
-                    )
-            } else {
-                Utils.getInstance()
-                    .showAlertDialog(this, response.message, "Error")
+                    .showAlertDialog(this, "Something went wrong.", "Error")
+
             }
 
         })
-        viewModel.updateAgentObserver().observe(this, Observer {
-            response->
+        viewModel.updateAgentObserver().observe(this, Observer { response ->
             if (!response.error) {
                 Utils.getInstance()
                     .showAlertDialog(
                         this,
-                        "Agent updated with ID ${response.data.id}",
+                        "Agent updated with ID ${response.data?.id}",
                         "Operation Successful"
                     )
             } else {

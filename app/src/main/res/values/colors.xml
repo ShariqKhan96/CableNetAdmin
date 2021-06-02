@@ -11,6 +11,7 @@
     <color name="androidGrey">#6E6E6E</color>
     <color name="androidGreyDark">#494949</color>
     <color name="androidLightGrey">#C3C3C3</color>
+    <color name="dialogBackground">#60000000</color>
 
     <color name="colorPrimaryDark">#00371A</color>
     <color name="colorPrimary">#006735</color>

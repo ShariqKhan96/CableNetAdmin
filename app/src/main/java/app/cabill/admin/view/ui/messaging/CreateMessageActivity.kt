@@ -26,16 +26,9 @@ class CreateMessageActivity : AppCompatActivity(), SelectDismissListener {
     private val iUserItemsAgent: List<Int> = emptyList()
     private val iUserItemsCustomer: List<Int> = emptyList()
     lateinit var selectDismissListener: SelectDismissListener
-    private val agentList: List<NameID> = listOf(
-        NameID("Shariq", 1), NameID("Saqib", 2),
-        NameID("Ali", 3), NameID("Hassan", 4)
-    )
-    private val customerList: List<NameID> = listOf(
-        NameID("Hussain", 1), NameID("Hassan", 2),
-        NameID("Haider", 3), NameID("Adnan", 4)
-    )
-    private val templateList: List<Template> =
-        listOf(Template("Independance Day", "This is test message", 1))
+    private val agentList: List<NameID> = listOf()
+    private val customerList: List<NameID> = listOf()
+    private val templateList: List<Template> = listOf()
     var count = 0
     lateinit var templatesRv: RecyclerView
     var checkedItem: Int = 0
@@ -66,6 +59,12 @@ class CreateMessageActivity : AppCompatActivity(), SelectDismissListener {
         }
         binding.selectTemplate.setOnClickListener {
             showTemplates()
+        }
+        binding.sendAllAgent.setOnClickListener {
+
+        }
+        binding.sendAllCustomer.setOnClickListener {
+
         }
 
         binding.toolbar.toolbarTv.text = "Send Message"

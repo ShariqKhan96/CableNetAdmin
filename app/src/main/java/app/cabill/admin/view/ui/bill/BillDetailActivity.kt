@@ -6,6 +6,7 @@ import android.widget.TextView
 import app.cabill.admin.R
 
 class BillDetailActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bill_detail)
@@ -13,6 +14,5 @@ class BillDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.toolbarTv).setOnClickListener {
             finish()
         }
-
     }
 }

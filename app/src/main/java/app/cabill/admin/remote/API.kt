@@ -62,7 +62,7 @@ interface API {
     suspend fun getAreas(): Response<List<Area>>
 
     @GET("admin-profile")
-    suspend fun getProfile(): Response<Profile>
+    suspend fun getProfile(): retrofit2.Response<Response<Profile>>
 
     @GET("update")
     suspend fun updateProfile(): Response<Profile>
@@ -78,5 +78,8 @@ interface API {
 
     @GET("bills")
     suspend fun bills(): retrofit2.Response<Response<BillData>>
+
+    @GET("dashboard")
+    suspend fun dashboard(@Query("date") date: String): retrofit2.Response<Response<Dashboard>>
 
 }

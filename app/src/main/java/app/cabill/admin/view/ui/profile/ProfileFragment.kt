@@ -52,6 +52,7 @@ class ProfileFragment : Fragment() {
             return fragment1
         }
     }
+
     class ChangePasswordFragment : Fragment() {
 
         lateinit var binding: FragmentChangePasswordBinding
@@ -92,7 +93,7 @@ class ProfileFragment : Fragment() {
                 else Utils.getInstance().dismissLoader()
             })
             viewModel.getProfileObserver().observe(viewLifecycleOwner, Observer {
-                if (!it.error) {
+                if (it != null) {
 
                     binding.ownerEmailEdt.setText(it.data?.email)
                     binding.address.setText(it.data?.address.toString())

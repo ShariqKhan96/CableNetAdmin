@@ -20,6 +20,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import app.cabill.admin.model.Response;
+
 public class Utils {
     public static ViewProgressDialog progressDialog;
     public static Utils instance;
@@ -109,5 +111,11 @@ public class Utils {
         i.setData(Uri.parse(url));
         con.startActivity(i);
 
+    }
+
+    @NotNull
+    public <T> Response<T> getResponseInstance() {
+
+        return new Response<T>(null, "", false, "");
     }
 }

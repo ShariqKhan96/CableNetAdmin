@@ -72,13 +72,13 @@ class InternetBillFragment : Fragment() {
             else Utils.getInstance().dismissLoader()
         })
         viewModel.billListObserver().observe(viewLifecycleOwner, Observer {
-            if (!it!!.error) {
-                list.clear()
-                list.addAll(it.data?.internetBills!!)
-                adapater.notifyDataSetChanged()
-            } else {
-                Utils.getInstance().showAlertDialog(requireContext(), it.message, "Error")
-            }
+                if (it != null) {
+                    list.clear()
+                    list.addAll(it.data?.internetBills!!)
+                    adapater.notifyDataSetChanged()
+                } else {
+                    Utils.getInstance().showAlertDialog(requireContext(), it?.message, "Error")
+                }
         })
     }
 

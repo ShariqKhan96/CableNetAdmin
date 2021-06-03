@@ -5,7 +5,7 @@ import app.cabill.admin.model.Response
 import app.cabill.admin.remote.RetrofitInstance
 
 class ProfileRepository {
-    suspend fun getProfile(): Response<Profile> {
+    suspend fun getProfile(): retrofit2.Response<Response<Profile>> {
         return RetrofitInstance.client().getProfile()
     }
 }

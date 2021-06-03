@@ -19,7 +19,13 @@ class ProfileViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO)
         {
             loaderLiveData.postValue(true)
-            profileLiveData.postValue(ProfileRepository().getProfile())
+            val response = ProfileRepository().getProfile()
+            if (response.isSuccessful) {
+                if (!response.body()?.error!!) {
+                    profileLiveData.postValue(response.body())
+                } else profileLiveData.postValue(null)
+            } else profileLiveData.postValue(null)
+
             loaderLiveData.postValue(false)
         }
     }

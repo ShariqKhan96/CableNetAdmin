@@ -74,12 +74,12 @@ class CableTvBillFragment : Fragment() {
         })
 
         viewModel.billListObserver().observe(viewLifecycleOwner, Observer {
-            if (!it!!.error) {
+            if (it != null) {
                 list.clear()
                 list.addAll(it.data?.cableBills!!)
                 adapater.notifyDataSetChanged()
             } else {
-                Utils.getInstance().showAlertDialog(requireContext(), it.message, "Error")
+                Utils.getInstance().showAlertDialog(requireContext(), it?.message, "Error")
             }
         })
     }

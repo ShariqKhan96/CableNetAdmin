@@ -24,9 +24,11 @@ class BillViewModel : ViewModel() {
         loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
             val resposne = BillRepository().bill()
-            if (resposne.isSuccessful)
-                billListLiveData.postValue(resposne.body())
-            else billListLiveData.postValue(null)
+            if (resposne.isSuccessful) {
+                if (!resposne.body()!!.error)
+                    billListLiveData.postValue(resposne.body())
+                else billListLiveData.postValue(null)
+            } else billListLiveData.postValue(null)
             loading.postValue(false)
         }
 

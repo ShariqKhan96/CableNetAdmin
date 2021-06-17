@@ -53,12 +53,12 @@ class CreatePackageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityCreatePackageBinding = ActivityCreatePackageBinding.inflate(layoutInflater)
         setContentView(activityCreatePackageBinding.root)
-        observeIntent()
         activityCreatePackageBinding.root.findViewById<TextView>(R.id.toolbarTv).text =
             "Create Package"
         activityCreatePackageBinding.root.findViewById<ImageView>(R.id.back).setOnClickListener {
             finish()
         }
+        observeIntent()
         activityCreatePackageBinding.cateogory.setOnClickListener {
             show(categoriesName, "category")
         }
@@ -100,7 +100,7 @@ class CreatePackageActivity : AppCompatActivity() {
                 typesID.add(response.data?.packageTypes!![i].id)
             }
         })
-        vm.categoriesAndTypes()
+        vm.categoriesAndTypes(this)
 
         activityCreatePackageBinding.save.setOnClickListener {
             if (package_ != null) {
@@ -111,7 +111,7 @@ class CreatePackageActivity : AppCompatActivity() {
                 package_!!.package_category_id = categoryId
                 package_!!.package_type_id = typeId
 
-                vm.updatePackage(package_!!)
+                vm.updatePackage(package_!!,this)
 
             } else {
                 //create
@@ -125,7 +125,7 @@ class CreatePackageActivity : AppCompatActivity() {
                         1,
                         activityCreatePackageBinding.name.text.toString(),
                         categoryId, typeId, "", null, null
-                    )
+                    ),this
                 )
             }
         }
@@ -151,9 +151,13 @@ class CreatePackageActivity : AppCompatActivity() {
 
     private fun bind_() {
         activityCreatePackageBinding.name.setText(package_?.name)
-        activityCreatePackageBinding.amount.setText(package_!!.amount)
-        activityCreatePackageBinding.discount.setText(package_!!.discount)
+        activityCreatePackageBinding.amount.setText(package_!!.amount.toString())
+        activityCreatePackageBinding.discount.setText(package_!!.discount.toString())
         activityCreatePackageBinding.cateogory.setText(package_?.package_category!!.name)
         activityCreatePackageBinding.type.setText(package_?.package_type?.name)
+
+        activityCreatePackageBinding.delete.visibility  =View.GONE
+        activityCreatePackageBinding.save.visibility = View.GONE
+        activityCreatePackageBinding.toolbar.toolbarTv.text = "Package"
     }
 }

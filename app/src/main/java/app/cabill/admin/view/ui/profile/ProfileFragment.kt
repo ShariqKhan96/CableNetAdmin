@@ -1,12 +1,17 @@
 package app.cabill.admin.view.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -15,7 +20,9 @@ import app.cabill.admin.R
 import app.cabill.admin.databinding.FragmentChangePasswordBinding
 import app.cabill.admin.databinding.FragmentGeneralSettingsBinding
 import app.cabill.admin.databinding.FragmentProfileBinding
+import app.cabill.admin.model.Profile
 import app.cabill.admin.util.Utils
+import app.cabill.admin.view.ui.map.PickLocationActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -72,7 +79,7 @@ class ProfileFragment : Fragment() {
     }
 
     class GeneralSettingsFragment : Fragment() {
-
+        private lateinit var profile: Profile
         lateinit var binding: FragmentGeneralSettingsBinding
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -80,11 +87,24 @@ class ProfileFragment : Fragment() {
             savedInstanceState: Bundle?
         ): View {
             binding = FragmentGeneralSettingsBinding.inflate(inflater, container, false)
-
             return binding.root
         }
 
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            if (resultCode == AppCompatActivity.RESULT_OK) {
+                if (requestCode == 1111) {
+                    profile.longitude = data?.getDoubleExtra("longitude", 0.0)!!
+                    profile.latitude = data.getDoubleExtra("latitude", 0.0)
+                    profile.address = data.getStringExtra("address")!!
+                    binding.address.setText(data.getStringExtra("address")!!)
+                }
+            }
+        }
+
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
             val viewModel: ProfileViewModel = ViewModelProvider(this)
                 .get(ProfileViewModel::class.java)
             viewModel.loaderLiveData.observe(viewLifecycleOwner, Observer {
@@ -92,19 +112,48 @@ class ProfileFragment : Fragment() {
                     Utils.getInstance().showLoader(context, "Please wait..")
                 else Utils.getInstance().dismissLoader()
             })
+            binding.save.setOnClickListener {
+                profile._method = "PUT"
+                viewModel.updateProfile(profile,requireContext())
+            }
+            viewModel.getProfileUpdateObserver().observe(viewLifecycleOwner, Observer {
+                if (!it.error) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Profile Updated Successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
             viewModel.getProfileObserver().observe(viewLifecycleOwner, Observer {
                 if (it != null) {
 
+                    profile = it.data!!
                     binding.ownerEmailEdt.setText(it.data?.email)
                     binding.address.setText(it.data?.address.toString())
                     binding.name.setText(it.data?.name)
                     binding.phone.setText(it.data?.phone.toString())
+                    binding.contactPerson.setText(it.data?.name.toString())
 
                 } else {
 
                 }
             })
-            viewModel.getProfile()
+            viewModel.getProfile(requireContext())
+            binding.address.setOnClickListener {
+                startActivityForResult(
+                    Intent(requireContext(), PickLocationActivity::class.java),
+                    1111
+                )
+            }
+            binding.name.doAfterTextChanged {
+                profile.name = it.toString()
+            }
+            binding.ownerEmailEdt.doAfterTextChanged {
+                profile.email = it.toString()
+            }
+
+
         }
 
     }
@@ -161,4 +210,6 @@ class ProfileFragment : Fragment() {
                 }
             }
     }
+
+
 }

@@ -5,35 +5,36 @@ import com.google.gson.annotations.SerializedName
 
 data class Profile(
     @SerializedName("address")
-    val address: Any,
+    var address: Any,
     @SerializedName("cnic")
-    val cnic: Any,
+    var cnic: Any,
     @SerializedName("company_id")
-    val companyId: Int,
+    var companyId: Int,
     @SerializedName("created_at")
-    val createdAt: String,
+    var createdAt: String,
     @SerializedName("email")
-    val email: String,
+    var email: String,
     @SerializedName("id")
-    val id: Int,
+    var id: Int,
     @SerializedName("image")
-    val image: Any,
+    var image: Any,
     @SerializedName("is_active")
-    val isActive: Int,
+    var isActive: Int,
     @SerializedName("latitude")
-    val latitude: Any,
+    var latitude: Double,
     @SerializedName("longitude")
-    val longitude: Any,
+    var longitude: Double,
     @SerializedName("name")
-    val name: String,
+    var name: String,
     @SerializedName("phone")
-    val phone: Any,
+    var phone: Any,
     @SerializedName("religion_id")
-    val religionId: Int,
+    var religionId: Int,
     @SerializedName("role_id")
-    val roleId: Int,
+    var roleId: Int,
     @SerializedName("updated_at")
-    val updatedAt: String,
+    var updatedAt: String,
     @SerializedName("verified_at")
-    val verifiedAt: Any
+    var verifiedAt: Any,
+    var _method:String
 )

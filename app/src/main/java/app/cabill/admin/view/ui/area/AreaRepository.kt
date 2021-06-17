@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.area
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import app.cabill.admin.model.Area
 import app.cabill.admin.model.Response
@@ -9,10 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AreaRepository {
-    fun list(coroutineScope: CoroutineScope, liveData: MutableLiveData<Response<List<Area>>>) {
+    fun list(coroutineScope: CoroutineScope, liveData: MutableLiveData<Response<List<Area>>>,context: Context) {
         coroutineScope.launch(Dispatchers.IO) {
             liveData.postValue(Response(null, "", false, "loading"))
-            val response = RetrofitInstance.client().getAreas()
+            val response = RetrofitInstance.client(context).getAreas()
             response.status = "no_loading"
             liveData.postValue(response)
         }
@@ -21,11 +22,12 @@ class AreaRepository {
     fun create(
         coroutineScope: CoroutineScope,
         liveData: MutableLiveData<Response<Area>>,
-        area: Area
+        area: Area,
+        context: Context
     ) {
         coroutineScope.launch(Dispatchers.IO) {
             liveData.postValue(Response(null, "", false, "loading"))
-            val response = RetrofitInstance.client().createArea(area)
+            val response = RetrofitInstance.client(context).createArea(area)
             response.status = "no_loading"
             liveData.postValue(response)
         }

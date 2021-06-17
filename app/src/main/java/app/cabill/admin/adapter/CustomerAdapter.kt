@@ -31,7 +31,7 @@ class CustomerAdapter(context: Context, val list: List<Customer>) :
     }
 
     override fun onBindViewHolder(holder: MYVH, position: Int) {
-        holder.customerAddress.text = "Address: " + list[position].address
+        holder.customerAddress.text = "Email: " + list[position].email
         holder.customerName.text = "Customer: ${list[position].name}"
       //  holder.agent.text = "Agent: ${list[position].}"
         holder.view.setOnClickListener {

@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.agent
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -21,10 +22,10 @@ class AgentListViewModel : ViewModel() {
         return loaderLiveData
     }
 
-    fun callAPI() {
+    fun callAPI(context: Context) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client().agents()
+            val response = RetrofitInstance.client(context).agents()
             agentListLiveData.postValue(response)
             loaderLiveData.postValue(false)
         }

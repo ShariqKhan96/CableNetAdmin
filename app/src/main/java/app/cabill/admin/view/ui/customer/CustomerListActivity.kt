@@ -29,7 +29,7 @@ class CustomerListActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = false
-            viewModel.getList()
+            viewModel.getList(this)
         }
         listenBind()
         initViewModel()
@@ -72,7 +72,7 @@ class CustomerListActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.getList()
+        viewModel.getList(this)
     }
 
     override fun onStop() {

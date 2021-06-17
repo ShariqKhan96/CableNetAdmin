@@ -60,8 +60,9 @@ class PickLocationActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
+
+        mMap = googleMap
         try {
 
             val success = googleMap.setMapStyle(

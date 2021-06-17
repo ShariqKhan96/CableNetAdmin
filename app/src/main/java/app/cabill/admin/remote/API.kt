@@ -5,12 +5,12 @@ import app.cabill.admin.model.*
 import retrofit2.http.*
 
 interface API {
+    @GET("auth/verify")
+    suspend fun verifyPhone(@Query("phone") mobile: String) :Response<VerifyModel>
+
     @FormUrlEncoded
-    @POST("login")
-    suspend fun login(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): Response<Int>
+    @POST("auth/login")
+    suspend fun login(@Field("code") code: String) :Response<AuthResponse?>
 
     @POST("agents")
     suspend fun createAgent(@Body agent: Agent): retrofit2.Response<Response<Agent>>
@@ -47,6 +47,22 @@ interface API {
     @POST("customers")
     suspend fun createCustomer(@Body customer: Customer): Response<Customer>
 
+    @FormUrlEncoded
+    @POST("connections")
+    suspend fun createConnection(
+        @Field("customer_id") customerId: Int,
+        @Field("package_id") packageId: Int,
+        @Field("is_active") is_active: Int
+    ):
+            Response<Connection>
+
+    @GET("connections")
+    suspend fun getConnections(): Response<List<Connection>>
+
+
+    @GET("connections/create")
+    suspend fun connectionPackages(): Response<PackageCustomerObject>
+
 
     @GET("sub_localities")
     suspend fun getSubLocalities(): Response<List<SubLocality>>
@@ -64,8 +80,8 @@ interface API {
     @GET("admin-profile")
     suspend fun getProfile(): retrofit2.Response<Response<Profile>>
 
-    @GET("update")
-    suspend fun updateProfile(): Response<Profile>
+    @POST("admin-profile")
+    suspend fun updateProfile(@Body profile: Profile): retrofit2.Response<Response<Profile>>
 
     @GET("customers/create")
     suspend fun getLists(): Response<SulLocalitiesAreaReligions>
@@ -81,5 +97,6 @@ interface API {
 
     @GET("dashboard")
     suspend fun dashboard(@Query("date") date: String): retrofit2.Response<Response<Dashboard>>
+
 
 }

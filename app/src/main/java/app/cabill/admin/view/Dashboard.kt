@@ -1,5 +1,6 @@
 package app.cabill.admin.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -32,6 +33,11 @@ class Dashboard : AppCompatActivity(), NavigationListener {
         navigation_listener = this
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
@@ -54,6 +60,10 @@ class Dashboard : AppCompatActivity(), NavigationListener {
             Log.e("destination", destination.label.toString())
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     override fun onNavigate(index: Int) {

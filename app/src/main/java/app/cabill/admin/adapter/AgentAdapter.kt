@@ -14,6 +14,7 @@ import app.cabill.admin.R
 import app.cabill.admin.model.Agent
 import app.cabill.admin.util.Utils
 import app.cabill.admin.view.ui.agent.CreateAgentActivity
+import com.google.gson.Gson
 
 
 class AgentAdapter(context: Context, l: ArrayList<Agent>) :
@@ -43,7 +44,10 @@ class AgentAdapter(context: Context, l: ArrayList<Agent>) :
         holder.agentID.text = "Agent ID: ${list[position].id}"
         holder.agentName.text = "${list[position].name}"
         holder.view.setOnClickListener {
-            con.startActivity(Intent(con, CreateAgentActivity::class.java).putExtra("action", 1))
+            con.startActivity(
+                Intent(con, CreateAgentActivity::class.java).putExtra("action", 1)
+                    .putExtra("agent", Gson().toJson(list[position]))
+            )
         }
         holder.phone.setOnClickListener {
             Utils.getInstance().call(list[position].phone, con)

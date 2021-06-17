@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.bill
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,10 +21,10 @@ class BillViewModel : ViewModel() {
         return billListLiveData
     }
 
-    fun getBills() {
+    fun getBills(context: Context) {
         loading.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val resposne = BillRepository().bill()
+            val resposne = BillRepository(context).bill()
             if (resposne.isSuccessful) {
                 if (!resposne.body()!!.error)
                     billListLiveData.postValue(resposne.body())

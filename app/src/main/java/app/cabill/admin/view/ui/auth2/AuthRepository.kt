@@ -1,5 +1,6 @@
-package app.cabill.admin.view.ui.auth
+package app.cabill.admin.view.ui.auth2
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import app.cabill.admin.model.Response
 import app.cabill.admin.remote.RetrofitInstance
@@ -13,13 +14,14 @@ class AuthRepository {
         loaderLiveData: MutableLiveData<Boolean>,
         loginLiveData: MutableLiveData<Response<Int>>,
         email: String,
-        password: String
+        password: String,
+        context: Context
     ) {
-        viewModeScope.launch(Dispatchers.IO) {
-            loaderLiveData.postValue(true)
-            val response = RetrofitInstance.client().login(email, password)
-            loaderLiveData.postValue(false)
-            loginLiveData.postValue(response)
-        }
+//        viewModeScope.launch(Dispatchers.IO) {
+//            loaderLiveData.postValue(true)
+//            val response = RetrofitInstance.client(context).login(email, password)
+//            loaderLiveData.postValue(false)
+//            loginLiveData.postValue(response)
+        //  }
     }
 }

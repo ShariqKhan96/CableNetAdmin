@@ -52,7 +52,7 @@ class PackagesFragment : Fragment() {
         binding = FragmentPackagesBinding.inflate(inflater, container, false)
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = false
-            vm.getPackages()
+            vm.getPackages(requireContext())
         }
         binding.root.findViewById<TextView>(R.id.toolbarTv).text = "My Packages"
         binding.root.findViewById<ImageView>(R.id.back).visibility = View.GONE
@@ -67,6 +67,13 @@ class PackagesFragment : Fragment() {
             adapter = adapter_
         }
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (vm != null)
+            vm.getPackages(requireContext())
+
     }
 
     private fun initViewModel() {
@@ -84,7 +91,7 @@ class PackagesFragment : Fragment() {
             } else
                 Utils.getInstance().showAlertDialog(requireContext(), response.message, "Error")
         })
-        vm.getPackages()
+
 
     }
 

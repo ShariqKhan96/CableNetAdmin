@@ -1,8 +1,7 @@
-package app.cabill.admin.view.ui.auth
+package app.cabill.admin.view.ui.auth2
 
 import android.util.Patterns
 import app.cabill.admin.util.Utils
-import java.util.regex.Pattern
 
 class AuthValidationFactory {
     fun validateEmailAndPassword(email: String, password: String): String? {

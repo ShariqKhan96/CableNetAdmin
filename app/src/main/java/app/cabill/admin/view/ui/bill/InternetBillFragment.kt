@@ -58,14 +58,14 @@ class InternetBillFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        viewModel.getBills()
+        viewModel.getBills(requireContext())
     }
 
     private fun initViewModel() {
 
         viewModel = ViewModelProvider(this)
             .get(BillViewModel::class.java)
-        viewModel.getBills()
+        viewModel.getBills(requireContext())
         viewModel.loadingObserver().observe(viewLifecycleOwner, Observer {
             if (it)
                 Utils.getInstance().showLoader(requireContext(), "Please wait...")

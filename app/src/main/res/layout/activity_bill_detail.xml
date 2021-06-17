@@ -29,6 +29,7 @@
                 android:text="Customer Name" />
 
             <EditText
+                android:id="@+id/customer_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -48,6 +49,7 @@
                 android:text="Package Name" />
 
             <EditText
+                android:id="@+id/package_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -66,6 +68,7 @@
                 android:text="Bill Price" />
 
             <EditText
+                android:id="@+id/bill_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -84,6 +87,7 @@
                 android:text="Bill Status" />
 
             <EditText
+                android:id="@+id/bill_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -102,6 +106,7 @@
                 android:text="Bill Balance" />
 
             <EditText
+                android:id="@+id/bill_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -121,6 +126,7 @@
                 android:text="Collected By" />
 
             <EditText
+                android:id="@+id/collected_by"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -140,6 +146,7 @@
                 android:text="Bill Issuance Date" />
 
             <EditText
+                android:id="@+id/bill_issuance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -158,6 +165,7 @@
                 android:text="Bill Expiry Date" />
 
             <EditText
+                android:id="@+id/bill_expiry_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

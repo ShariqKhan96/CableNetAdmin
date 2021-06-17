@@ -170,11 +170,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:text="Monthly Connections"
                     android:textColor="@color/black"
-                    android:textSize="14sp">
+                    android:textSize="12sp">
 
                 </TextView>
             </LinearLayout>
@@ -195,12 +195,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/monthly_earning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
                     android:text="0"
-                    android:id="@+id/monthly_earning"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="34sp"
                     android:textStyle="bold">
@@ -214,7 +214,7 @@
                     android:layout_marginTop="5dp"
                     android:text="Monthly Earning"
                     android:textColor="@color/black"
-                    android:textSize="14sp">
+                    android:textSize="12sp">
 
                 </TextView>
             </LinearLayout>
@@ -520,7 +520,7 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/manage_complaint"
+                android:id="@+id/manage_connection"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_row="2"
@@ -555,7 +555,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
-                        android:text="Complaints"
+                        android:text="Add Connection"
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="normal">

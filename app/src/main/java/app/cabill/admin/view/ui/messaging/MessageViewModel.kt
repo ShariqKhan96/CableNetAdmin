@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.messaging
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,24 +26,27 @@ class MessageViewModel : ViewModel() {
         return messageCreateLiveData
     }
 
-    fun create(message: Message) {
+   // val templateData:MutableLiveData<>
+
+    fun create(message: Message, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             loaderLiveData.postValue(true)
-            messageCreateLiveData.postValue(MessageRepository().create(message))
+            messageCreateLiveData.postValue(MessageRepository().create(message, context))
             loaderLiveData.postValue(false)
         }
     }
 
-    fun list() {
+    fun list(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             loaderLiveData.postValue(true)
-            val response = MessageRepository().list()
+            val response = MessageRepository().list(context)
             loaderLiveData.postValue(false)
             messageListLiveData.postValue(response)
         }
     }
-    fun templates(){
-        viewModelScope.launch(Dispatchers.IO){
+
+    fun templates() {
+        viewModelScope.launch(Dispatchers.IO) {
 
         }
     }

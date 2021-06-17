@@ -85,14 +85,21 @@ class MessagingListFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this)
             .get(MessageViewModel::class.java)
+        viewModel.loaderObserver().observe(viewLifecycleOwner, Observer {
+            if (it)
+                Utils.getInstance().showLoader(requireContext(), "Please wait...")
+            else Utils.getInstance().dismissLoader()
+        })
         viewModel.messageLiveDataObserver().observe(viewLifecycleOwner, Observer { res ->
             if (!res.error) {
+                list.clear()
                 list.addAll(res.data!!)
                 adapter.notifyDataSetChanged()
             } else {
                 Utils.getInstance().showAlertDialog(context, res.message, "Error")
             }
         })
+        viewModel.list(requireContext())
     }
 
 

@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import app.cabill.admin.databinding.FragmentDashboardBinding
@@ -20,6 +21,7 @@ import app.cabill.admin.view.Dashboard
 import app.cabill.admin.view.ui.agent.AgentListActivity
 import app.cabill.admin.view.ui.area.AreaLocalityListActivity
 import app.cabill.admin.view.ui.complaint.ComplaintListActivity
+import app.cabill.admin.view.ui.connection.ConnectionActivity
 import app.cabill.admin.view.ui.customer.CustomerListActivity
 import java.util.*
 
@@ -39,24 +41,27 @@ class DashboardFragment : Fragment() {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        date = Calendar.getInstance().get(Calendar.YEAR).toString() + "-" + Calendar.getInstance()
+            .get(Calendar.MONTH).toString() + "-" + Calendar.getInstance()
+            .get(Calendar.DAY_OF_MONTH).toString()
+        Log.e("Date", date)
         initViewModel()
         //val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding.totalEarningTv.text = tvTransform("0", "PKR")
         binding.receivableTv.text = tvTransform("0", "PKR")
         binding.balanceTv.text = tvTransform("0", "PKR")
-        date = Calendar.getInstance().get(Calendar.YEAR).toString() + "-" + Calendar.getInstance()
-            .get(Calendar.MONTH).toString() + "-" + Calendar.getInstance()
-            .get(Calendar.DAY_OF_MONTH).toString()
-        Log.e("Date", date)
+
 
         binding.calendarIv.setOnClickListener {
             val pd = MonthYearPickerDialog()
             pd.setListener(DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-                viewModel.dashboard(i.toString() + "-" + (i2 + 1).toString() + "-" + i3)
+                date = i.toString() + "-" + (i2).toString() + "-" + i3
+                viewModel.dashboard(date, requireContext())
             })
             pd.show(parentFragmentManager, "MonthYearPickerDialog")
         }
 
+        binding
         binding.manageCustomer.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, CustomerListActivity::class.java))
@@ -74,6 +79,8 @@ class DashboardFragment : Fragment() {
         }
 
         binding.manageArea.setOnClickListener {
+            Toast.makeText(requireContext(), "Development in progress...", Toast.LENGTH_LONG).show()
+            return@setOnClickListener
             activity?.let {
                 startActivity(Intent(it, AreaLocalityListActivity::class.java))
             }
@@ -83,9 +90,9 @@ class DashboardFragment : Fragment() {
             Log.e("here", "jere")
         }
 
-        binding.manageComplaint.setOnClickListener {
+        binding.manageConnection.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, ComplaintListActivity::class.java))
+                startActivity(Intent(it, ConnectionActivity::class.java))
             }
         }
         return binding.root
@@ -103,11 +110,12 @@ class DashboardFragment : Fragment() {
             if (it != null) {
                 binding.totalConnection.setText(it.monthlyConnections.toString())
                 binding.monthlyEarning.setText(it.monthlyEarnings.toString())
-                binding.totalEarningTv.setText(it.totalEarnings.toString())
-                binding.receivableTv.setText(it.monthlyReceived.toString())
-                binding.balanceTv.setText(it.monthlyReceivables.toString())
+                binding.totalEarningTv.setText(it.totalEarnings.toString() + " PKR")
+                binding.receivableTv.setText(it.monthlyReceived.toString() + " PKR")
+                binding.balanceTv.setText(it.monthlyReceivables.toString() + " PKR")
             }
         })
+        viewModel.dashboard(date, requireContext())
     }
 
     private fun tvTransform(text1: String, text2: String): CharSequence {

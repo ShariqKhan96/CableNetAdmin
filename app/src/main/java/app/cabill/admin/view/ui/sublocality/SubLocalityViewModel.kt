@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.sublocality
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,12 +23,12 @@ class SubLocalityViewModel : ViewModel() {
         return getSubLocalityLiveData
     }
 
-    fun getSubLocalitiesAPI() {
-        SubLocalityRepository().list(viewModelScope, getSubLocalityLiveData)
+    fun getSubLocalitiesAPI(context: Context) {
+        SubLocalityRepository().list(viewModelScope, getSubLocalityLiveData,context)
     }
 
-    fun createSubLocalityAPI(subLocality: SubLocality) {
-        SubLocalityRepository().create(viewModelScope, createSubLocalityLiveData,subLocality)
+    fun createSubLocalityAPI(subLocality: SubLocality,context: Context) {
+        SubLocalityRepository().create(viewModelScope, createSubLocalityLiveData,subLocality,context)
     }
 
 }

@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.packages
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.cabill.admin.model.CategoriesAndTypes
@@ -17,19 +18,19 @@ class PackageRepository(
     val loaderLiveData: MutableLiveData<Boolean>
 ) {
 
-    fun getPackageList() {
+    fun getPackageList(context: Context) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client().packages()
+            val response = RetrofitInstance.client(context).packages()
             packageListMutableLiveData.postValue(response)
             loaderLiveData.postValue(false)
         }
     }
 
-    fun createPackage(pack: Package) {
+    fun createPackage(pack: Package,context: Context) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client().createPackage(
+            val response = RetrofitInstance.client(context).createPackage(
                 pack.name,
                 pack.amount.toString(),
                 pack.discount.toString(),
@@ -42,19 +43,19 @@ class PackageRepository(
         }
     }
 
-    fun updatePackage(pack: Package, packageUpdateLiveData: MutableLiveData<Response<Package>>) {
+    fun updatePackage(pack: Package, packageUpdateLiveData: MutableLiveData<Response<Package>>,context: Context) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client().updatePackage(pack, pack.id)
+            val response = RetrofitInstance.client(context).updatePackage(pack, pack.id)
             loaderLiveData.postValue(false)
             packageUpdateLiveData.postValue(response)
         }
     }
 
-    fun getCatAndTypesList(typesCatsLiveData: MutableLiveData<Response<CategoriesAndTypes>>) {
+    fun getCatAndTypesList(typesCatsLiveData: MutableLiveData<Response<CategoriesAndTypes>>,context: Context) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client().categoriesAndTypesList()
+            val response = RetrofitInstance.client(context).categoriesAndTypesList()
             typesCatsLiveData.postValue(response)
             loaderLiveData.postValue(false)
         }

@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.sublocality
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import app.cabill.admin.model.Response
 import app.cabill.admin.model.SubLocality
@@ -12,7 +13,8 @@ class SubLocalityRepository {
     fun create(
         coroutineScope: CoroutineScope,
         createSubLocalityViewModel: MutableLiveData<Response<SubLocality>>,
-        subLocality: SubLocality
+        subLocality: SubLocality,
+        context: Context
     ) {
 
         coroutineScope.launch(Dispatchers.IO) {
@@ -24,7 +26,7 @@ class SubLocalityRepository {
                     "loading"
                 )
             )
-            val response = RetrofitInstance.client().createSubLocality(subLocality)
+            val response = RetrofitInstance.client(context).createSubLocality(subLocality)
             response.status = "no_loading"
             createSubLocalityViewModel.postValue(response)
         }
@@ -32,11 +34,12 @@ class SubLocalityRepository {
 
     fun list(
         coroutineScope: CoroutineScope,
-        getSubLocalityLiveData: MutableLiveData<Response<List<SubLocality>>>
+        getSubLocalityLiveData: MutableLiveData<Response<List<SubLocality>>>,
+        context: Context
     ) {
         coroutineScope.launch(Dispatchers.IO) {
             getSubLocalityLiveData.postValue(Response(null, "", false, "loading"))
-            val response = RetrofitInstance.client().getSubLocalities()
+            val response = RetrofitInstance.client(context).getSubLocalities()
             response.status = "no_loading"
             getSubLocalityLiveData.postValue(response)
         }

@@ -1,5 +1,9 @@
 package app.cabill.admin.remote
 
+import android.content.Context
+import android.util.Log
+import app.cabill.admin.cache.PrefUtils
+import app.cabill.admin.constants.Constants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -12,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitInstance {
     companion object {
-        fun client(): API {
+        fun client(context: Context): API {
             val builder = OkHttpClient.Builder()
 
             val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -49,11 +53,14 @@ class RetrofitInstance {
 //                        .addHeader(Constants.ACCEPT_VERSION, BuildConfig.VERSION_NAME.toString())
 //                        .addHeader(Constants.ACCEPT_LANGUAGE, "en")
 //                        .addHeader(Constants.AUTHORIZATION, "Bearer " + accessToken2)
-
+                            .addHeader(
+                                "Authorization",
+                                "Bearer " + PrefUtils.getString(Constants.TOKEN, context)
+                            )
                             .build()
 //
 //                    Log.e("model_name", model_name)
-//                    Log.e("token", accessToken2)
+                    Log.e("headers", request.headers.toString())
                         return chain.proceed(request)
                     }
                 })

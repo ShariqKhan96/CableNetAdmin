@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.customer
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import app.cabill.admin.model.Customer
 import app.cabill.admin.model.Response
@@ -12,11 +13,12 @@ import kotlinx.coroutines.launch
 class CustomerRepository {
     fun getList(
         viewModelScope: CoroutineScope, loaderLiveData: MutableLiveData<Boolean>,
-        customerListLiveData: MutableLiveData<Response<List<Customer>>>
+        customerListLiveData: MutableLiveData<Response<List<Customer>>>,
+        context: Context
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             loaderLiveData.postValue(true)
-            val response = RetrofitInstance.client().getCustomers()
+            val response = RetrofitInstance.client(context).getCustomers()
             customerListLiveData.postValue(response)
             loaderLiveData.postValue(false)
         }
@@ -24,11 +26,11 @@ class CustomerRepository {
 
     fun createCustomer(
         viewModelScope: CoroutineScope, loaderLiveData: MutableLiveData<Boolean>,
-        createCustomerLiveData: MutableLiveData<Response<Customer>>, customer: Customer
+        createCustomerLiveData: MutableLiveData<Response<Customer>>, customer: Customer,context: Context
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             loaderLiveData.postValue(true)
-            val response = RetrofitInstance.client().createCustomer(customer)
+            val response = RetrofitInstance.client(context).createCustomer(customer)
             createCustomerLiveData.postValue(response)
             loaderLiveData.postValue(false)
         }
@@ -36,11 +38,11 @@ class CustomerRepository {
 
     fun getNecessaryData(
         coroutineScope: CoroutineScope, loaderLiveData: MutableLiveData<Boolean>,
-        liveDta: MutableLiveData<Response<SulLocalitiesAreaReligions>>
+        liveDta: MutableLiveData<Response<SulLocalitiesAreaReligions>>,context: Context
     ) {
         coroutineScope.launch(Dispatchers.IO) {
             loaderLiveData.postValue(true)
-            val response = RetrofitInstance.client().getLists()
+            val response = RetrofitInstance.client(context).getLists()
             liveDta.postValue(response)
             loaderLiveData.postValue(false)
         }

@@ -61,11 +61,11 @@ class CustomerDetailActivity : AppCompatActivity(),
     private var rfaLayout: RapidFloatingActionLayout? = null
     private var rfaBtn: RapidFloatingActionButton? = null
     private var rfabHelper: RapidFloatingActionHelper? = null
-    lateinit var binding: ActivityCustomerDetailBinding
+        lateinit var binding: ActivityCustomerDetailBinding
 
-    var subLocalityId: Int = 0
-    var localityId: Int = 0
-    var religionId: Int = 0
+        var subLocalityId: Int = 0
+        var localityId: Int = 0
+        var religionId: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +83,7 @@ class CustomerDetailActivity : AppCompatActivity(),
     private fun initViewModel() {
         viewModel = ViewModelProvider(this)
             .get(CustomerViewModel::class.java)
-        viewModel.getRelSubLoc()
+        viewModel.getRelSubLoc(this)
 
         viewModel.loaderLiveDataObserver().observe(this, androidx.lifecycle.Observer {
             if (it)
@@ -262,7 +262,7 @@ class CustomerDetailActivity : AppCompatActivity(),
                     subLocalityId.toString(),
                     ""
                 )
-                viewModel.createCustomer(customer1)
+                viewModel.createCustomer(customer1,this)
 
             } else {
                 //edit

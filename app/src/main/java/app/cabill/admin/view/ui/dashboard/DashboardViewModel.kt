@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.dashboard
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,15 +21,17 @@ class DashboardViewModel : ViewModel() {
         return dashboardData
     }
 
-    fun dashboard(date: String) {
+    fun dashboard(date: String,context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
-            val response = DashboardRepository().dashboard(date)
+            val response = DashboardRepository().dashboard(date,context)
             if (response.isSuccessful) {
                 if (!response.body()?.error!!) {
                     dashboardData.postValue(response.body()?.data)
                 } else dashboardData.postValue(null)
             } else dashboardData.postValue(null)
+
+        loading.postValue(false)
         }
     }
 }

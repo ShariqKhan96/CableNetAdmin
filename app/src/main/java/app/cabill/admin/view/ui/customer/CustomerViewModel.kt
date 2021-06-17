@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.customer
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,20 +32,26 @@ class CustomerViewModel : ViewModel() {
         return listsLiveData
     }
 
-     fun getList() {
-        CustomerRepository().getList(viewModelScope, loaderLiveData, customerListLiveData)
+    fun getList(context: Context) {
+        CustomerRepository().getList(viewModelScope, loaderLiveData, customerListLiveData,context)
     }
 
-     fun createCustomer(customer: Customer) {
+    fun createCustomer(customer: Customer, context: Context) {
         CustomerRepository().createCustomer(
             viewModelScope,
             loaderLiveData,
             customerCreateLiveData,
-            customer
+            customer,
+            context
         )
     }
 
-     fun getRelSubLoc() {
-        CustomerRepository().getNecessaryData(viewModelScope, loaderLiveData, listsLiveData)
+    fun getRelSubLoc(context: Context) {
+        CustomerRepository().getNecessaryData(
+            viewModelScope,
+            loaderLiveData,
+            listsLiveData,
+            context
+        )
     }
 }

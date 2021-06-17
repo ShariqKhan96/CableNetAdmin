@@ -26,7 +26,7 @@ class AgentListActivity : AppCompatActivity() {
         binding = ActivityAgentListBinding.inflate(layoutInflater)
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = false
-            viewModel.callAPI()
+            viewModel.callAPI(this)
         }
         setContentView(binding.root)
         initViewModel()
@@ -66,6 +66,12 @@ class AgentListActivity : AppCompatActivity() {
                 Utils.getInstance().showAlertDialog(this, it.message, "Error")
             }
         })
-        viewModel.callAPI()
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (viewModel != null)
+            viewModel.callAPI(this)
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.cabill.admin.R
 import app.cabill.admin.model.InternetBill
 import app.cabill.admin.view.ui.bill.BillDetailActivity
+import com.google.gson.Gson
 
 class BillAdapter<T>(context: Context, val list: ArrayList<T>) :
     RecyclerView.Adapter<BillAdapter.MYVH>() {
@@ -46,7 +47,7 @@ class BillAdapter<T>(context: Context, val list: ArrayList<T>) :
                         Intent(
                             con,
                             BillDetailActivity::class.java
-                        )
+                        ).putExtra("internet_bill", Gson().toJson(bill))
                     )
                 }
             } catch (e: Exception) {

@@ -108,6 +108,11 @@ class CreateAgentActivity : AppCompatActivity() {
         binding.phoneEdt.setText(agent?.phone)
         binding.salary.setText(agent?.salary)
         binding.regligionEdt.setText(agent?.religion_id.toString())
+
+        binding.save.visibility = View.GONE
+        binding.delete.visibility = View.GONE
+
+        binding.toolbar.toolbarTv.text = "Agent"
     }
 
     private fun initViewModel() {
@@ -169,7 +174,7 @@ class CreateAgentActivity : AppCompatActivity() {
                         1,
                         null,
                         binding.salary.text.toString()
-                    )
+                    ),this
                 )
             } else {
                 agent?.name = binding.nameEdt.text.toString()
@@ -181,7 +186,7 @@ class CreateAgentActivity : AppCompatActivity() {
                 agent?.latitude = lat!!
                 agent?.salary = binding.salary.text.toString()
 
-                viewModel.update(agent, agent?.id!!)
+                viewModel.update(agent, agent?.id!!,this)
             }
 
         }

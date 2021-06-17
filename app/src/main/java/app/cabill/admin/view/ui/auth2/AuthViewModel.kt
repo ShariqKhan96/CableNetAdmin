@@ -1,5 +1,6 @@
-package app.cabill.admin.view.ui.auth
+package app.cabill.admin.view.ui.auth2
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,10 +23,10 @@ class AuthViewModel : ViewModel() {
         return validatorLiveData
     }
 
-    fun login(email: String, password: String) {
+    fun login(email: String, password: String,context: Context) {
         val validation = AuthValidationFactory().validateEmailAndPassword(email, password)
         if (validation == null) {
-            AuthRepository().login(viewModelScope, loaderLiveData, loginLiveData, email, password)
+            AuthRepository().login(viewModelScope, loaderLiveData, loginLiveData, email, password,context)
         } else {
             validatorLiveData.postValue(validation)
         }

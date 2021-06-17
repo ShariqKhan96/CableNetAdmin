@@ -1,5 +1,6 @@
 package app.cabill.admin.view.ui.packages
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,41 +34,41 @@ class PackageFragmentViewModel : ViewModel() {
         return packageUpdateLiveData
     }
 
-    fun updatePackage(pack: Package) {
+    fun updatePackage(pack: Package, context: Context) {
         PackageRepository(
             viewModelScope,
             packageListMutableLiveData,
             packageCreateLiveData,
             loaderLiveData
-        ).updatePackage(pack, packageUpdateLiveData)
+        ).updatePackage(pack, packageUpdateLiveData, context)
 
     }
 
-    fun getPackages() {
+    fun getPackages(context: Context) {
         PackageRepository(
             viewModelScope,
             packageListMutableLiveData,
             packageCreateLiveData,
             loaderLiveData
-        ).getPackageList()
+        ).getPackageList(context)
     }
 
-    fun createPackage(pack: Package) {
+    fun createPackage(pack: Package, context: Context) {
         PackageRepository(
             viewModelScope,
             packageListMutableLiveData,
             packageCreateLiveData,
             loaderLiveData
-        ).createPackage(pack)
+        ).createPackage(pack, context)
 
     }
 
-    fun categoriesAndTypes() {
+    fun categoriesAndTypes(context: Context) {
         PackageRepository(
             viewModelScope,
             packageListMutableLiveData,
             packageCreateLiveData,
             loaderLiveData
-        ).getCatAndTypesList(categoriesTypesLiveData)
+        ).getCatAndTypesList(categoriesTypesLiveData, context)
     }
 }

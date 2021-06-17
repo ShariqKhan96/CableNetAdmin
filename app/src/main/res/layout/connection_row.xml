@@ -45,6 +45,7 @@
             </TextView>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/customer_agent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
                 android:background="@drawable/top_right_round_view">
 
                 <TextView
+                    android:id="@+id/package_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

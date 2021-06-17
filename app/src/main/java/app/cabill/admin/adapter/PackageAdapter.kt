@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.cabill.admin.R
 import app.cabill.admin.model.Package
 import app.cabill.admin.view.ui.packages.CreatePackageActivity
+import com.google.gson.Gson
 
 class PackageAdapter(context: Context, val list: ArrayList<Package>) :
     RecyclerView.Adapter<PackageAdapter.MYVH>() {
@@ -38,7 +39,7 @@ class PackageAdapter(context: Context, val list: ArrayList<Package>) :
         holder.package_name.text = list[position].name
         holder.package_type.text = list[position].package_type!!.name
         holder.viewDetails.setOnClickListener {
-            con.startActivity(Intent(con, CreatePackageActivity::class.java))
+            con.startActivity(Intent(con, CreatePackageActivity::class.java).putExtra("package", Gson().toJson(list[position])))
         }
     }
 

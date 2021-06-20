@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import app.cabill.admin.model.Response
 import app.cabill.admin.model.SubLocality
 import app.cabill.admin.remote.RetrofitInstance
+import app.cabill.agent.base.BaseViewModel
 
-class SubLocalityViewModel : ViewModel() {
+class SubLocalityViewModel : BaseViewModel() {
 
     private val createSubLocalityLiveData: MutableLiveData<Response<SubLocality>> =
         MutableLiveData()

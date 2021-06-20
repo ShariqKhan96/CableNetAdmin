@@ -6,9 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import app.cabill.admin.R
 import app.cabill.admin.adapter.AreaLocalityListAdapter
+import app.cabill.admin.databinding.FragmentAreaListBinding
 import app.cabill.admin.databinding.FragmentSublocalityBinding
+import app.cabill.admin.model.Area
+import app.cabill.admin.model.SubLocality
+import app.cabill.admin.view.ui.area.AreaViewModel
 import app.cabill.admin.view.ui.area.CreateAreaActivity
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +30,9 @@ private const val ARG_PARAM2 = "param2"
 class SublocalityFragment : Fragment() {
 
     private lateinit var binding: FragmentSublocalityBinding
+    lateinit var viewModel: SubLocalityViewModel
+    private val list: ArrayList<SubLocality> = arrayListOf()
+    private lateinit var adapter: AreaLocalityListAdapter<SubLocality>
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -43,15 +52,36 @@ class SublocalityFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSublocalityBinding.inflate(inflater, container, false)
+        adapter = AreaLocalityListAdapter(list, requireContext())
         binding.areas.apply {
-            adapter = AreaLocalityListAdapter()
+            adapter = this@SublocalityFragment.adapter
         }
         binding.fab.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, SublocalityActivity::class.java))
             }
         }
+        initViewModel()
+
         return binding.root
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this)
+            .get(SubLocalityViewModel::class.java)
+        viewModel.getSubLocalityLiveDataObserver().observe(viewLifecycleOwner, Observer {
+            if (!it.error) {
+                list.clear()
+                list.addAll(it.data!!)
+                adapter.notifyDataSetChanged()
+            }
+        })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (viewModel != null)
+            viewModel.getSubLocalitiesAPI(requireContext())
     }
 
     companion object {

@@ -80,7 +80,7 @@ class DashboardFragment : Fragment() {
 
         binding.manageArea.setOnClickListener {
             Toast.makeText(requireContext(), "Development in progress...", Toast.LENGTH_LONG).show()
-            return@setOnClickListener
+           // return@setOnClickListener
             activity?.let {
                 startActivity(Intent(it, AreaLocalityListActivity::class.java))
             }

@@ -28,11 +28,9 @@ class Dashboard : AppCompatActivity(), NavigationListener {
     companion object {
         lateinit var navigation_listener: NavigationListener
     }
-
     init {
         navigation_listener = this
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

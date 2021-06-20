@@ -1,14 +1,18 @@
 package app.cabill.admin.view.ui.agent
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import app.cabill.admin.databinding.ActivityCreateAgentBinding
 import app.cabill.admin.model.Agent
+import app.cabill.admin.model.SulLocalitiesAreaReligions
 import app.cabill.admin.util.Utils
+import app.cabill.admin.view.ui.customer.CustomerViewModel
 import app.cabill.admin.view.ui.map.PickLocationActivity
 import com.google.gson.Gson
 import com.karumi.dexter.Dexter
@@ -19,13 +23,17 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 
 class CreateAgentActivity : AppCompatActivity() {
+    private lateinit var sulLocalitiesAreaReligions: SulLocalitiesAreaReligions
     val REQUEST_CODE = 123
     var long: Double? = null
     var lat: Double? = null
 
     var action: Int = 0 ///0->create, 1->edit/delete
     var agent: Agent? = null
-    val religionID: Int = 1
+    var religionNameArray: ArrayList<String> = ArrayList()
+    var religionIdArray: ArrayList<Int> = ArrayList()
+
+    var religionId: Int = 0
 
     lateinit var viewModel: CreateAgentViewModel
     lateinit var binding: ActivityCreateAgentBinding
@@ -37,8 +45,28 @@ class CreateAgentActivity : AppCompatActivity() {
         bindData(agent)
         initViewModel()
         actions()
+        binding.regligionEdt.setOnClickListener {
+            showDialog(religionNameArray, "rel")
+        }
 
 
+    }
+
+    private fun showDialog(array: ArrayList<String>, type: String) {
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setItems(
+            array.toTypedArray(),
+            DialogInterface.OnClickListener { dialogInterface, i ->
+                dialogInterface.dismiss()
+
+                //find religion by id
+                religionId = religionIdArray[i]
+                binding.regligionEdt.setText(religionNameArray[i])
+
+
+            })
+        builder.show()
     }
 
 
@@ -123,7 +151,7 @@ class CreateAgentActivity : AppCompatActivity() {
             else Utils.getInstance().dismissLoader()
         })
         viewModel.createAgentObserver().observe(this, Observer { response ->
-            if (response!=null){
+            if (response != null) {
                 if (!response.error) {
                     Utils.getInstance()
                         .showAlertDialog(
@@ -136,7 +164,7 @@ class CreateAgentActivity : AppCompatActivity() {
                         .showAlertDialog(this, response.message, "Error")
                 }
 
-            }else{
+            } else {
                 Utils.getInstance()
                     .showAlertDialog(this, "Something went wrong.", "Error")
 
@@ -157,6 +185,31 @@ class CreateAgentActivity : AppCompatActivity() {
             }
         })
 
+
+        val vm = ViewModelProvider(this)
+            .get(CustomerViewModel::class.java)
+        vm.getNecessaryDataObserver().observe(this, androidx.lifecycle.Observer {
+            if (!it.error)
+                sulLocalitiesAreaReligions = it.data!!
+
+
+
+            for (i in sulLocalitiesAreaReligions.religions.indices) {
+                religionNameArray.add(sulLocalitiesAreaReligions.religions[i].name)
+                religionIdArray.add(sulLocalitiesAreaReligions.religions[i].id)
+            }
+
+            for (i in sulLocalitiesAreaReligions.religions.indices) {
+                if (religionIdArray[i] == agent?.religion_id) {
+                    religionId = religionIdArray[i]
+                    binding.regligionEdt.setText(religionNameArray[i])
+                }
+            }
+        })
+        vm.getRelSubLoc(this)
+
+
+
         binding.save.setOnClickListener {
 
             if (action == 0) {
@@ -174,7 +227,7 @@ class CreateAgentActivity : AppCompatActivity() {
                         1,
                         null,
                         binding.salary.text.toString()
-                    ),this
+                    ), this
                 )
             } else {
                 agent?.name = binding.nameEdt.text.toString()
@@ -186,7 +239,7 @@ class CreateAgentActivity : AppCompatActivity() {
                 agent?.latitude = lat!!
                 agent?.salary = binding.salary.text.toString()
 
-                viewModel.update(agent, agent?.id!!,this)
+                viewModel.update(agent, agent?.id!!, this)
             }
 
         }

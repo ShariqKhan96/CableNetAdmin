@@ -7,7 +7,7 @@ data class Profile(
     @SerializedName("address")
     var address: Any,
     @SerializedName("cnic")
-    var cnic: Any,
+    var cnic: String,
     @SerializedName("company_id")
     var companyId: Int,
     @SerializedName("created_at")

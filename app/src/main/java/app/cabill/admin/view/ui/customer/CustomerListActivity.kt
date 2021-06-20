@@ -72,7 +72,12 @@ class CustomerListActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    override fun onStart() {
+        super.onStart()
         viewModel.getList(this)
+
     }
 
     override fun onStop() {

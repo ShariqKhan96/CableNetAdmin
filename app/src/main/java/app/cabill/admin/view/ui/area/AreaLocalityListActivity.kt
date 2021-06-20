@@ -41,6 +41,9 @@ class AreaLocalityListActivity : FragmentActivity() {
         }.attach()
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
     class AreaLocalityDividerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
 

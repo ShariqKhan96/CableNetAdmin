@@ -60,6 +60,7 @@
             </EditText>
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -67,6 +68,7 @@
                 android:text="Contact Person" />
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/contact_person"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -75,6 +77,29 @@
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
                 android:paddingStart="10dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingStart="10dp"
+                android:text="CNIC" />
+
+            <EditText
+                android:id="@+id/cnic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edt"
+                android:digits="0123456789-"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="13"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+            </EditText>
 
             <TextView
                 android:layout_width="wrap_content"

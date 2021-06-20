@@ -6,11 +6,11 @@ import retrofit2.http.*
 
 interface API {
     @GET("auth/verify")
-    suspend fun verifyPhone(@Query("phone") mobile: String) :Response<VerifyModel>
+    suspend fun verifyPhone(@Query("phone") mobile: String): Response<VerifyModel>
 
     @FormUrlEncoded
     @POST("auth/login")
-    suspend fun login(@Field("code") code: String) :Response<AuthResponse?>
+    suspend fun login(@Field("code") code: String): Response<AuthResponse?>
 
     @POST("agents")
     suspend fun createAgent(@Body agent: Agent): retrofit2.Response<Response<Agent>>
@@ -64,11 +64,11 @@ interface API {
     suspend fun connectionPackages(): Response<PackageCustomerObject>
 
 
-    @GET("sub_localities")
+    @GET("sub-localities")
     suspend fun getSubLocalities(): Response<List<SubLocality>>
 
 
-    @POST("sub_localities")
+    @POST("sub-localities")
     suspend fun createSubLocality(@Body subLocality: SubLocality): Response<SubLocality>
 
     @POST("area")
@@ -90,13 +90,23 @@ interface API {
     suspend fun getMessages(): Response<List<Message>>
 
     @POST("messages")
-    suspend fun createMessage(@Body message: Message): Response<Message>
+    suspend fun createMessage(@Body message: Message): Response<Any>
 
     @GET("bills")
     suspend fun bills(): retrofit2.Response<Response<BillData>>
 
     @GET("dashboard")
     suspend fun dashboard(@Query("date") date: String): retrofit2.Response<Response<Dashboard>>
+
+    @GET("messages/templates")
+    suspend fun templates(): Response<List<Template>>
+
+    @GET("localities")
+    suspend fun localities(): Response<List<Area>>
+
+
+    @POST("localities")
+    suspend fun createLocality(@Body area: Area): Response<Area>
 
 
 }

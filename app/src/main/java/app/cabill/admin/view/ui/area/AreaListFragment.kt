@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import app.cabill.admin.R
 import app.cabill.admin.adapter.AreaLocalityListAdapter
 import app.cabill.admin.databinding.FragmentAreaListBinding
 import app.cabill.admin.databinding.FragmentSublocalityBinding
+import app.cabill.admin.model.Area
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,8 +29,11 @@ class AreaListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var binding: FragmentAreaListBinding
 
+    lateinit var viewModel: AreaViewModel
+    private lateinit var binding: FragmentAreaListBinding
+    private val list: ArrayList<Area> = ArrayList()
+    private lateinit var adapter: AreaLocalityListAdapter<Area>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -42,15 +48,36 @@ class AreaListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentAreaListBinding.inflate(inflater, container, false)
+        adapter = AreaLocalityListAdapter(list, requireContext())
         binding.areas.apply {
-            adapter = AreaLocalityListAdapter()
+            adapter = this@AreaListFragment.adapter
         }
         binding.fab.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, CreateAreaActivity::class.java))
+                //it.finish()
             }
         }
+        initViewModel()
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (viewModel != null)
+            viewModel.list(requireContext())
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this)
+            .get(AreaViewModel::class.java)
+        viewModel.areaListObserver().observe(viewLifecycleOwner, Observer {
+            if (!it.error) {
+                list.clear()
+                list.addAll(it.data!!)
+                adapter.notifyDataSetChanged()
+            }
+        })
     }
 
     companion object {

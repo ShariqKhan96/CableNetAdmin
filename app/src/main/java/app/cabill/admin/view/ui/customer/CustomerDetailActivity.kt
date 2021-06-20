@@ -57,15 +57,15 @@ class CustomerDetailActivity : AppCompatActivity(),
     var religionNameArray: ArrayList<String> = ArrayList()
     var religionIdArray: ArrayList<Int> = ArrayList()
 
+    var religionId: Int = 0
     //fab
     private var rfaLayout: RapidFloatingActionLayout? = null
     private var rfaBtn: RapidFloatingActionButton? = null
     private var rfabHelper: RapidFloatingActionHelper? = null
-        lateinit var binding: ActivityCustomerDetailBinding
 
-        var subLocalityId: Int = 0
-        var localityId: Int = 0
-        var religionId: Int = 0
+        lateinit var binding: ActivityCustomerDetailBinding
+    var subLocalityId: Int = 0
+    var localityId: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

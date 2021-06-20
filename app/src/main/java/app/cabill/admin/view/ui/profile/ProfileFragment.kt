@@ -114,7 +114,7 @@ class ProfileFragment : Fragment() {
             })
             binding.save.setOnClickListener {
                 profile._method = "PUT"
-                viewModel.updateProfile(profile,requireContext())
+                viewModel.updateProfile(profile, requireContext())
             }
             viewModel.getProfileUpdateObserver().observe(viewLifecycleOwner, Observer {
                 if (!it.error) {
@@ -134,6 +134,7 @@ class ProfileFragment : Fragment() {
                     binding.name.setText(it.data?.name)
                     binding.phone.setText(it.data?.phone.toString())
                     binding.contactPerson.setText(it.data?.name.toString())
+                    binding.cnic.setText(it.data?.cnic.toString())
 
                 } else {
 
@@ -151,6 +152,15 @@ class ProfileFragment : Fragment() {
             }
             binding.ownerEmailEdt.doAfterTextChanged {
                 profile.email = it.toString()
+            }
+            binding.cnic.doAfterTextChanged {
+                profile.cnic = it.toString()
+            }
+            binding.address.doAfterTextChanged {
+                profile.address = it.toString()
+            }
+            binding.phone.doAfterTextChanged {
+                profile.phone = it.toString()
             }
 
 

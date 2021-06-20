@@ -13,7 +13,7 @@ class AreaRepository {
     fun list(coroutineScope: CoroutineScope, liveData: MutableLiveData<Response<List<Area>>>,context: Context) {
         coroutineScope.launch(Dispatchers.IO) {
             liveData.postValue(Response(null, "", false, "loading"))
-            val response = RetrofitInstance.client(context).getAreas()
+            val response = RetrofitInstance.client(context).localities()
             response.status = "no_loading"
             liveData.postValue(response)
         }
@@ -27,7 +27,7 @@ class AreaRepository {
     ) {
         coroutineScope.launch(Dispatchers.IO) {
             liveData.postValue(Response(null, "", false, "loading"))
-            val response = RetrofitInstance.client(context).createArea(area)
+            val response = RetrofitInstance.client(context).createLocality(area)
             response.status = "no_loading"
             liveData.postValue(response)
         }

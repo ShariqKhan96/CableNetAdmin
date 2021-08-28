@@ -17,9 +17,9 @@ class AreaViewModel : BaseViewModel() {
     }
 
     fun list(context: Context) {
-        loading.postValue(true)
-        AreaRepository().list(viewModelScope, areaList, context)
-        loading.postValue(false)
+     //   loading.postValue(true)
+        AreaRepository().list(viewModelScope, areaList, context,loading)
+      //  loading.postValue(false)
     }
 
     private val createArea = MutableLiveData<Response<Area>>()
@@ -29,8 +29,8 @@ class AreaViewModel : BaseViewModel() {
     }
 
     fun create(context: Context, area: Area) {
-        loading.postValue(true)
-        AreaRepository().create(viewModelScope, createArea, area, context)
-        loading.postValue(false)
+        //loading.postValue(true)
+        AreaRepository().create(viewModelScope, createArea, area, context,loading)
+       // loading.postValue(false)
     }
 }

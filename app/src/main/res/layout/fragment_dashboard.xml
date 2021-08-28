@@ -189,6 +189,7 @@
             app:cardUseCompatPadding="true">
 
             <LinearLayout
+                android:id="@+id/monthly_earning_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -411,7 +412,7 @@
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:layout_margin="10dp"
-                        android:src="@drawable/ic_baseline_event_24"
+                        android:src="@drawable/ic_baseline_pin_drop_24"
                         app:tint="@color/colorPrimaryDark">
 
                     </ImageView>
@@ -422,7 +423,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
-                        android:text="Cable Bill"
+                        android:text="Area / Sublocalities"
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="normal">
@@ -589,7 +590,7 @@
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:layout_margin="10dp"
-                        android:src="@drawable/ic_baseline_pin_drop_24"
+                        android:src="@drawable/inventory"
                         app:tint="@color/colorPrimaryDark">
 
                     </ImageView>
@@ -600,7 +601,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
-                        android:text="Area/Sub locality"
+                        android:text="Inventory"
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="normal">

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.ui.customer.CustomerDetailActivity">
+    android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar">
@@ -22,30 +22,11 @@
             android:layout_margin="15dp"
             android:orientation="vertical">
 
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edt"
-                android:focusableInTouchMode="false"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="Customer ID"
-                android:imeOptions="actionNext"
-
-
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:visibility="gone">
-
-
-            </EditText>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="Name" />
+                android:text="Product Name" />
 
             <EditText
                 android:id="@+id/name"
@@ -53,87 +34,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edt"
-                android:fontFamily="@font/roboto_regular"
                 android:imeOptions="actionNext"
+                android:inputType="textCapWords"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">
 
             </EditText>
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="10dp"
                 android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
-                android:text="Amount in PKR" />
-
-            <EditText
-                android:id="@+id/amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_edt"
-                android:digits="0123456789-"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="15"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-
-            </EditText>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
-                android:text="Discount in %" />
-
-            <EditText
-                android:id="@+id/discount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_edt"
-                android:digits="0123456789+()"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:text="0"
-                android:maxLength="16"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-
-            </EditText>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
-                android:text="Category" />
-
-            <EditText
-                android:id="@+id/cateogory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_edt"
-                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
-                android:focusableInTouchMode="false"
-                android:imeOptions="actionNext"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-
-            </EditText>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingStart="10dp"
                 android:text="Type" />
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,6 +59,7 @@
                 android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
                 android:focusableInTouchMode="false"
                 android:imeOptions="actionNext"
+                android:inputType="textCapWords"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp">
 
@@ -150,24 +68,94 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:paddingStart="10dp"
-                android:text="Status"
-                android:visibility="gone" />
+                android:layout_marginTop="15dp"
+                android:text="Price in Rs" />
 
             <EditText
+                android:id="@+id/price"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
                 android:background="@drawable/bg_edt"
-                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
-                android:focusableInTouchMode="false"
-                android:imeOptions="actionDone"
-                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
+                android:inputType="number"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:visibility="gone" />
+                android:paddingEnd="10dp">
+
+            </EditText>
+
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Model" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:focusableInTouchMode="false"
+                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                android:background="@drawable/bg_edt"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+            </EditText>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Stock" />
+
+            <EditText
+                android:id="@+id/stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edt"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+            </EditText>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Description (Minimum 25 characters)" />
+
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edt"
+                android:gravity="top"
+                android:paddingTop="10dp"
+                android:imeOptions="actionNext"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+            </EditText>
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,8 +165,8 @@
                 android:weightSum="2">
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="0dp"
                     android:id="@+id/save"
+                    android:layout_width="0dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
@@ -195,12 +183,13 @@
                 </com.google.android.material.button.MaterialButton>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete"
                     android:layout_width="0dp"
                     android:layout_height="55dp"
-                    android:id="@+id/delete"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="10dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
                     android:text="Delete"
@@ -213,7 +202,7 @@
 
                 </com.google.android.material.button.MaterialButton>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>

@@ -25,11 +25,11 @@ class SubLocalityViewModel : BaseViewModel() {
     }
 
     fun getSubLocalitiesAPI(context: Context) {
-        SubLocalityRepository().list(viewModelScope, getSubLocalityLiveData,context)
+        SubLocalityRepository().list(viewModelScope, getSubLocalityLiveData,context,loading)
     }
 
     fun createSubLocalityAPI(subLocality: SubLocality,context: Context) {
-        SubLocalityRepository().create(viewModelScope, createSubLocalityLiveData,subLocality,context)
+        SubLocalityRepository().create(viewModelScope, createSubLocalityLiveData,subLocality,context,loading)
     }
 
 }

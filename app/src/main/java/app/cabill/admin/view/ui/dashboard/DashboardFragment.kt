@@ -1,6 +1,8 @@
 package app.cabill.admin.view.ui.dashboard
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
@@ -23,6 +25,9 @@ import app.cabill.admin.view.ui.area.AreaLocalityListActivity
 import app.cabill.admin.view.ui.complaint.ComplaintListActivity
 import app.cabill.admin.view.ui.connection.ConnectionActivity
 import app.cabill.admin.view.ui.customer.CustomerListActivity
+import app.cabill.admin.view.ui.inventory.DispatchListActivity
+import app.cabill.admin.view.ui.inventory.InventoryListActivity
+import app.cabill.admin.view.ui.surrender.SurrenderListActivity
 import java.util.*
 
 
@@ -41,6 +46,7 @@ class DashboardFragment : Fragment() {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
+
         date = Calendar.getInstance().get(Calendar.YEAR).toString() + "-" + Calendar.getInstance()
             .get(Calendar.MONTH).toString() + "-" + Calendar.getInstance()
             .get(Calendar.DAY_OF_MONTH).toString()
@@ -50,6 +56,7 @@ class DashboardFragment : Fragment() {
         binding.totalEarningTv.text = tvTransform("0", "PKR")
         binding.receivableTv.text = tvTransform("0", "PKR")
         binding.balanceTv.text = tvTransform("0", "PKR")
+     //   binding.companyNameTv.setText("Hi Smart Fiber")
 
 
         binding.calendarIv.setOnClickListener {
@@ -58,10 +65,14 @@ class DashboardFragment : Fragment() {
                 date = i.toString() + "-" + (i2).toString() + "-" + i3
                 viewModel.dashboard(date, requireContext())
             })
+
             pd.show(parentFragmentManager, "MonthYearPickerDialog")
         }
 
-        binding
+        binding.monthlyEarningCard.setOnClickListener {
+            startActivity(Intent(requireContext(), SurrenderListActivity::class.java))
+        }
+
         binding.manageCustomer.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, CustomerListActivity::class.java))
@@ -79,15 +90,30 @@ class DashboardFragment : Fragment() {
         }
 
         binding.manageArea.setOnClickListener {
-            Toast.makeText(requireContext(), "Development in progress...", Toast.LENGTH_LONG).show()
-           // return@setOnClickListener
+            // Toast.makeText(requireContext(), "Development in progress...", Toast.LENGTH_LONG).show()
+            // return@setOnClickListener
             activity?.let {
-                startActivity(Intent(it, AreaLocalityListActivity::class.java))
+
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setItems(
+                    arrayOf("Dispatch Inventory", "Create Inventory")
+                ) { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                    if (i == 0) {
+
+                        startActivity(Intent(it, DispatchListActivity::class.java))
+
+                    } else startActivity(Intent(it, InventoryListActivity::class.java))
+
+                }
+                builder.show()
             }
         }
         binding.cableBill.setOnClickListener {
-            Dashboard.navigation_listener.onNavigate(1)
-            Log.e("here", "jere")
+            //   Dashboard.navigation_listener.onNavigate(1)
+            // Log.e("here", "jere")
+            startActivity(Intent(requireActivity(), AreaLocalityListActivity::class.java))
+
         }
 
         binding.manageConnection.setOnClickListener {

@@ -41,6 +41,15 @@ class SublocalityActivity : AppCompatActivity() {
         binding.save.setOnClickListener {
             if (!binding.name.text.isEmpty()) {
 
+                if (binding.name.text.toString().isEmpty() || areaID == 0) {
+                    Utils.getInstance().showAlertDialog(
+                        this,
+                        "Some fields are empty. Please fill the form completely.",
+                        ""
+                    )
+                    return@setOnClickListener
+                }
+
                 val sublocality = SubLocality(0, binding.name.text.toString(), "", "", areaID)
                 viewModel.createSubLocalityAPI(sublocality, this)
 
@@ -75,8 +84,13 @@ class SublocalityActivity : AppCompatActivity() {
         vm.areaListObserver().observe(this, Observer {
             list.addAll(it.data!!)
         })
+
         viewModel = ViewModelProvider(this)
             .get(SubLocalityViewModel::class.java)
+        viewModel.loadingObserver().observe(this, Observer {
+            if (it) Utils.getInstance().showLoader(this, "Please wait..")
+            else Utils.getInstance().dismissLoader()
+        })
         viewModel.createSubLocalityObserver().observe(this, Observer { response ->
             if (response.status == "loading") {
                 Utils.getInstance().showLoader(this, "Please wait...")

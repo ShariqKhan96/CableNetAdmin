@@ -13,6 +13,7 @@ import app.cabill.admin.adapter.AreaLocalityListAdapter
 import app.cabill.admin.databinding.FragmentAreaListBinding
 import app.cabill.admin.databinding.FragmentSublocalityBinding
 import app.cabill.admin.model.Area
+import app.cabill.admin.util.Utils
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,10 +74,17 @@ class AreaListFragment : Fragment() {
             .get(AreaViewModel::class.java)
         viewModel.areaListObserver().observe(viewLifecycleOwner, Observer {
             if (!it.error) {
+
                 list.clear()
                 list.addAll(it.data!!)
                 adapter.notifyDataSetChanged()
             }
+        })
+
+        viewModel.loadingObserver().observe(viewLifecycleOwner, Observer {
+            if (it)
+                Utils.getInstance().showLoader(requireContext(), "Please wait..")
+            else Utils.getInstance().dismissLoader()
         })
     }
 

@@ -111,21 +111,35 @@ class CreatePackageActivity : AppCompatActivity() {
                 package_!!.package_category_id = categoryId
                 package_!!.package_type_id = typeId
 
-                vm.updatePackage(package_!!,this)
+                vm.updatePackage(package_!!, this)
 
             } else {
                 //create
+
+                if (activityCreatePackageBinding.amount.text.toString().isEmpty() ||
+                    activityCreatePackageBinding.discount.toString().isEmpty() ||
+                    activityCreatePackageBinding.name.text.toString().isEmpty() ||
+                    categoryId == 0 || typeId == 0
+                ) {
+                    Utils.getInstance().showAlertDialog(
+                        this,
+                        "Some fields are empty. Please fill the form completely.",
+                        ""
+                    )
+                return@setOnClickListener
+                }
+
                 vm.createPackage(
                     Package(
                         activityCreatePackageBinding.amount.text.toString().toInt(),
-                        0,
+                        null,
                         "",
                         activityCreatePackageBinding.discount.text.toString().toInt(),
-                        0,
+                        null,
                         1,
                         activityCreatePackageBinding.name.text.toString(),
                         categoryId, typeId, "", null, null
-                    ),this
+                    ), this
                 )
             }
         }
@@ -156,7 +170,7 @@ class CreatePackageActivity : AppCompatActivity() {
         activityCreatePackageBinding.cateogory.setText(package_?.package_category!!.name)
         activityCreatePackageBinding.type.setText(package_?.package_type?.name)
 
-        activityCreatePackageBinding.delete.visibility  =View.GONE
+        activityCreatePackageBinding.delete.visibility = View.GONE
         activityCreatePackageBinding.save.visibility = View.GONE
         activityCreatePackageBinding.toolbar.toolbarTv.text = "Package"
     }

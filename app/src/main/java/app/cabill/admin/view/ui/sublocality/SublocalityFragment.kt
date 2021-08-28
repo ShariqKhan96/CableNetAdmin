@@ -14,6 +14,7 @@ import app.cabill.admin.databinding.FragmentAreaListBinding
 import app.cabill.admin.databinding.FragmentSublocalityBinding
 import app.cabill.admin.model.Area
 import app.cabill.admin.model.SubLocality
+import app.cabill.admin.util.Utils
 import app.cabill.admin.view.ui.area.AreaViewModel
 import app.cabill.admin.view.ui.area.CreateAreaActivity
 
@@ -75,6 +76,11 @@ class SublocalityFragment : Fragment() {
                 list.addAll(it.data!!)
                 adapter.notifyDataSetChanged()
             }
+        })
+        viewModel.loadingObserver().observe(viewLifecycleOwner, Observer {
+            if (it)
+                Utils.getInstance().showLoader(requireContext(), "Please wait..")
+            else Utils.getInstance().dismissLoader()
         })
     }
 

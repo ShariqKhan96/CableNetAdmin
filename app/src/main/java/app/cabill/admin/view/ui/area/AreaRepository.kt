@@ -10,12 +10,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AreaRepository {
-    fun list(coroutineScope: CoroutineScope, liveData: MutableLiveData<Response<List<Area>>>,context: Context) {
+    fun list(
+        coroutineScope: CoroutineScope,
+        liveData: MutableLiveData<Response<List<Area>>>,
+        context: Context,
+        loading: MutableLiveData<Boolean>
+    ) {
         coroutineScope.launch(Dispatchers.IO) {
-            liveData.postValue(Response(null, "", false, "loading"))
+            //  liveData.postValue(Response(null, "", false, "loading"))
+        //   loading.postValue(true)
             val response = RetrofitInstance.client(context).localities()
             response.status = "no_loading"
             liveData.postValue(response)
+         // loading.postValue(false)
         }
     }
 
@@ -23,13 +30,16 @@ class AreaRepository {
         coroutineScope: CoroutineScope,
         liveData: MutableLiveData<Response<Area>>,
         area: Area,
-        context: Context
+        context: Context,
+        loading: MutableLiveData<Boolean>
     ) {
         coroutineScope.launch(Dispatchers.IO) {
-            liveData.postValue(Response(null, "", false, "loading"))
+            // liveData.postValue(Response(null, "", false, "loading"))
+          //  loading.postValue(true)
             val response = RetrofitInstance.client(context).createLocality(area)
             response.status = "no_loading"
             liveData.postValue(response)
+         //  loading.postValue(false)
         }
     }
 }

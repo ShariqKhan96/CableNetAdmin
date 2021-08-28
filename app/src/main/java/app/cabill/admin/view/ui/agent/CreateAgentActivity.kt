@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,8 +26,8 @@ import com.karumi.dexter.listener.single.PermissionListener
 class CreateAgentActivity : AppCompatActivity() {
     private lateinit var sulLocalitiesAreaReligions: SulLocalitiesAreaReligions
     val REQUEST_CODE = 123
-    var long: Double? = null
-    var lat: Double? = null
+    var long: Double? = 0.0
+    var lat: Double? = 0.0
 
     var action: Int = 0 ///0->create, 1->edit/delete
     var agent: Agent? = null
@@ -213,6 +214,21 @@ class CreateAgentActivity : AppCompatActivity() {
         binding.save.setOnClickListener {
 
             if (action == 0) {
+
+                if (binding.nameEdt.text.toString()
+                        .isEmpty() || binding.ownerEmailEdt.text.toString().isEmpty() ||
+                    binding.phoneEdt.text.toString().isEmpty() || binding.cnicEdt.text.toString()
+                        .isEmpty() ||
+                    binding.address.text.toString().isEmpty() || binding.salary.text.toString()
+                        .isEmpty()
+                ) {
+                    Utils.getInstance().showAlertDialog(
+                        this,
+                        "Some fields are empty. Please fill the form completely.",
+                        ""
+                    )
+                    return@setOnClickListener
+                }
                 viewModel.create(
                     Agent(
                         binding.nameEdt.text.toString(),

@@ -99,9 +99,13 @@ class MessagingListFragment : Fragment() {
                 Utils.getInstance().showAlertDialog(context, res.message, "Error")
             }
         })
-        viewModel.list(requireContext())
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.list(requireContext())
+
+    }
 
     companion object {
         /**

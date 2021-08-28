@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import app.cabill.admin.R
+import app.cabill.admin.model.CableBill
 import app.cabill.admin.model.InternetBill
 import app.cabill.admin.view.ui.bill.BillDetailActivity
 import com.google.gson.Gson
@@ -57,7 +58,7 @@ class BillAdapter<T>(context: Context, val list: ArrayList<T>) :
 
             //DO IT FOR CABLE LATER
 
-            val bill = list[position] as InternetBill
+            val bill = list[position] as CableBill
             try {
                 holder.balance.setText("Balance :${bill.balance} Rs")
                 if (bill.status == null)
@@ -72,7 +73,7 @@ class BillAdapter<T>(context: Context, val list: ArrayList<T>) :
                         Intent(
                             con,
                             BillDetailActivity::class.java
-                        )
+                        ).putExtra("internet_bill", Gson().toJson(bill))
                     )
                 }
             } catch (e: Exception) {

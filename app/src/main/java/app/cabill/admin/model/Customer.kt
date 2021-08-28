@@ -9,19 +9,21 @@ data class Customer(
     @SerializedName("cnic")
     val cnic: String,
     @SerializedName("company_id")
-    val companyId: Int,
+    val companyId: Int?,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("email")
     val email: String,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("image")
     val image: String,
     @SerializedName("is_active")
     val isActive: String,
     @SerializedName("latitude")
     val latitude: String,
+    @SerializedName("longitude")
+    val longitude: String,
     @SerializedName("locality_id")
     val localityId: String,
     @SerializedName("name")

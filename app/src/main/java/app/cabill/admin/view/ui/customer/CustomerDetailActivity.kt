@@ -58,12 +58,13 @@ class CustomerDetailActivity : AppCompatActivity(),
     var religionIdArray: ArrayList<Int> = ArrayList()
 
     var religionId: Int = 0
+
     //fab
     private var rfaLayout: RapidFloatingActionLayout? = null
     private var rfaBtn: RapidFloatingActionButton? = null
     private var rfabHelper: RapidFloatingActionHelper? = null
 
-        lateinit var binding: ActivityCustomerDetailBinding
+    lateinit var binding: ActivityCustomerDetailBinding
     var subLocalityId: Int = 0
     var localityId: Int = 0
 
@@ -243,18 +244,40 @@ class CustomerDetailActivity : AppCompatActivity(),
                 }).check()
         }
         binding.save.setOnClickListener {
+
+
             if (customer == null) {
+                if (binding.address.text.toString().isEmpty() || binding.cnic.text.toString()
+                        .isEmpty() ||
+                    binding.ownerEmailEdt.text.toString().isEmpty() ||
+                    binding.ownerEmailEdt.text.toString().isEmpty() ||
+                    binding.name.text.toString().isEmpty() ||
+                    binding.phone.text.toString().isEmpty() ||
+                    religionId == 0 ||
+                    localityId == 0 ||
+                    subLocalityId == 0
+                ) {
+                    Utils.getInstance().showAlertDialog(
+                        this,
+                        "Some fields are empty. Please fill the form completely.",
+                        ""
+                    )
+                    return@setOnClickListener
+                }
+
+
                 //create
                 val customer1: Customer = Customer(
                     binding.address.text.toString(),
                     binding.cnic.text.toString(),
-                    1,
+                    null,
                     "",
                     binding.ownerEmailEdt.text.toString(),
                     0,
                     "",
                     "1",
                     lat.toString(),
+                    long.toString(),
                     localityId.toString(),
                     binding.name.text.toString(),
                     binding.phone.text.toString(),
@@ -262,7 +285,7 @@ class CustomerDetailActivity : AppCompatActivity(),
                     subLocalityId.toString(),
                     ""
                 )
-                viewModel.createCustomer(customer1,this)
+                viewModel.createCustomer(customer1, this)
 
             } else {
                 //edit

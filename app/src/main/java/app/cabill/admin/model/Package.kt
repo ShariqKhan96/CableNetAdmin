@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Package(
     @SerializedName("amount")
-    var amount: Int,
+    var amount: Int?,
     @SerializedName("company_id")
-    var companyId: Int,
+    var companyId: Int?,
     @SerializedName("created_at")
     var createdAt: String,
     @SerializedName("discount")
-    var discount: Int,
+    var discount: Int?,
     @SerializedName("id")
-    var id: Int,
+    var id: Int?,
     @SerializedName("is_active")
     var is_active: Int,
     @SerializedName("name")

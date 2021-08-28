@@ -108,5 +108,33 @@ interface API {
     @POST("localities")
     suspend fun createLocality(@Body area: Area): Response<Area>
 
+    @POST("inventory-items")
+    suspend fun addProduct(@Body inventory: Inventory): Response<Inventory>
 
+
+    @PUT("inventory-items/{id}")
+    suspend fun updateProduct(@Path("id") id: Int, @Body inventory: Inventory): Response<Inventory>
+
+    @GET("inventory-items")
+    suspend fun products(): Response<List<Inventory>>
+
+    @GET("dispatched-items")
+    suspend fun products_disp(): Response<List<Dispatcher>>
+
+    @FormUrlEncoded
+    @POST("dispatched-items/{id}")
+    suspend fun disp_item(
+        @Path("id") id: Int, @Field("notes") notes: String, @Field("quantity")
+        qty: Int, @Field("user_id") uid: Int
+    ): Response<Any>
+
+
+    @GET("inventory/create")
+    suspend fun getInventoryList(): Response<InventoryModelList>
+
+    @GET("surrender-collections")
+    suspend fun getSurrenderList(): retrofit2.Response<Response<List<Surrender>>>
+
+    @PUT("surrender-collections/{id}")
+    suspend fun updateSurrender(@Path("id") id: Int): retrofit2.Response<Any>
 }

@@ -46,7 +46,7 @@ class PackageRepository(
     fun updatePackage(pack: Package, packageUpdateLiveData: MutableLiveData<Response<Package>>,context: Context) {
         loaderLiveData.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitInstance.client(context).updatePackage(pack, pack.id)
+            val response = RetrofitInstance.client(context).updatePackage(pack, pack.id!!)
             loaderLiveData.postValue(false)
             packageUpdateLiveData.postValue(response)
         }

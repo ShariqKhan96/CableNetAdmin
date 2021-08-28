@@ -13,14 +13,19 @@
     <application
         android:name="app.cabill.Cabill"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_png"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_png"
         android:supportsRtl="true"
         android:theme="@style/Theme.CableNetAdmin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.ui.connection.CreateConnectionActivity"></activity>
+        <activity android:name="app.cabill.admin.view.ui.inventory.AddDispatcherActivity"></activity>
+        <activity android:name="app.cabill.admin.view.ui.inventory.DispatchListActivity" />
+        <activity android:name=".view.ui.surrender.SurrenderListActivity" />
+        <activity android:name=".view.ui.inventory.AddInventoryActivity" />
+        <activity android:name=".view.ui.inventory.InventoryListActivity" />
+        <activity android:name=".view.ui.connection.CreateConnectionActivity" />
         <activity android:name=".view.ui.connection.ConnectionActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -42,8 +47,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="app.cabill.agent.view.auth.LoginActivity"/>
-
+        <activity android:name="app.cabill.agent.view.auth.LoginActivity" />
         <activity
             android:name=".view.ui.map.PickLocationActivity"
             android:label="@string/title_activity_pick_location" />

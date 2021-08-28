@@ -64,9 +64,11 @@ class LoginActivity : FragmentActivity() {
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    bypass = true
                     Utils.getInstance().dismissLoader()
                     viewModel.login(verifyToken, this)
                 } else {
+                    bypass = false
                     Utils.getInstance().dismissLoader()
                     // stopCounter();
                     // Sign in failed, display a message and update the UI

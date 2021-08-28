@@ -74,8 +74,8 @@ class CreateConnectionActivity : AppCompatActivity() {
             StringArrayList.toTypedArray(),
             DialogInterface.OnClickListener { dialogInterface, i ->
                 dialogInterface.dismiss()
-                packageID = packageList[i].id
-                packagePrice = packageList[i].amount
+                packageID = packageList[i].id!!
+                packagePrice = packageList[i].amount!!
                 binding.packageName.setText(StringArrayList[i])
                 binding.price.setText(packageList[i].amount.toString())
             })
@@ -97,7 +97,7 @@ class CreateConnectionActivity : AppCompatActivity() {
 //                binding.packageName.setText(StringArrayList[i])
 //                binding.price.setText(packagePrice)
                 binding.name.setText(customerList[i].name)
-                customerId = customerList[i].id
+                customerId = customerList[i].id!!
             })
         builder.show()
     }

@@ -78,12 +78,15 @@ class PackagesFragment : Fragment() {
 
     private fun initViewModel() {
         vm = ViewModelProvider(requireActivity()).get(PackageFragmentViewModel::class.java)
-        vm.getLoaderObserver().observe(requireActivity(), Observer {
-            if (it)
-                Utils.getInstance().showLoader(requireActivity(), "Please wait...")
+        vm.getLoaderObserver().observe(viewLifecycleOwner, Observer {
+            if (it){
+             activity?.let{
+                 Utils.getInstance().showLoader(requireContext(), "Please wait...")
+             }
+            }
             else Utils.getInstance().dismissLoader()
         })
-        vm.getPackageListObserver().observe(requireActivity(), Observer { response ->
+        vm.getPackageListObserver().observe(viewLifecycleOwner, Observer { response ->
             if (!response.error) {
                 list.clear()
                 list.addAll(response.data!!)
